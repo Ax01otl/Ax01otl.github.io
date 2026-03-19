@@ -60,16 +60,6 @@ prismjs:
   preprocess: true
   line_number: true
   tab_replace: ''
-math:
-  every_page: true
-
-  mathjax:
-    enable: false
-    tags: none
-
-  katex:
-    enable: true
-    copy_tex: false
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
