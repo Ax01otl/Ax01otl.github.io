@@ -1,5 +1,10 @@
 ---
 title: The Beginning of a Blog Era
+date: 2026-03-19 12:00:00
+categories:
+  \- Startup
+tags:
+  \- Log
 ---
 - **这是第一次搭建博客的小小记录**
 - 使用的是 Hexo 进行博客管理；目前使用的模板是 `NEXT`
@@ -20,4 +25,4 @@ title: The Beginning of a Blog Era
 
 - 例如这个博客引用图片就会是这样 （当然 `Typora` 里面不可见了……有点烦😥，有空再研究一下）
 
-![MyLove](profile.png)
+![MyLove](profile.jpg)
