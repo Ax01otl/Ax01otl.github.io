@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ax01otl.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="前言&#x2F;音频知识点汇总 音乐理论学习仓库：GitHub - BenzLeung&#x2F;benz-audio-engine: 一个简单的基于 Web Audio API 的音效引擎 小demo：Web Audio API 小教程  音频文件分析思路  直接听音乐：左右声道有无区别？（立体声）是否是很奇怪的呲呲声？（SSTV&#x2F;波形隐写&#x2F;AFSK） Audacity频域分析看波形是否有隐藏信息&#x2F;不同采样率下有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MP3">
+<meta property="og:url" content="https://ax01otl.github.io/posts/MP3/index.html">
+<meta property="og:site_name" content="Ax01otl&#39;s Blog">
+<meta property="og:description" content="前言&#x2F;音频知识点汇总 音乐理论学习仓库：GitHub - BenzLeung&#x2F;benz-audio-engine: 一个简单的基于 Web Audio API 的音效引擎 小demo：Web Audio API 小教程  音频文件分析思路  直接听音乐：左右声道有无区别？（立体声）是否是很奇怪的呲呲声？（SSTV&#x2F;波形隐写&#x2F;AFSK） Audacity频域分析看波形是否有隐藏信息&#x2F;不同采样率下有">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260129154122064.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260129154754813.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260129155041590.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260120162333404.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260120162437421.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260120162644011.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260120170209189.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260125084858485.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260125085356160.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260125090405826.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260125090554181.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260125090700650.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260125090816334.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260125091408187.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260128215621087.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/19716-20241005091606857-659104030.webp">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260202081741111.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260202094955158.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260202084752056.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260128220556295.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260128220730873.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260129094459720.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260129094137260.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260129093310065.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260129093407648.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260129095247073.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260129100434414.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127222736313.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127223017498.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127224354054.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127224811070.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260128103728713.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260128205932845.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260128210338047.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/3-Unpleasant_music.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/e2900941cf21f3b2db4ef3a5ffb4e163.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/97c5fcfbcb3c08a43b09e466dacd7135.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260227183239281.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260227191301644.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/f33cc570f0b5cdd58557eeb02b305986.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/922a527354c2045f169592370a179bfa.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260227182341122.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260129225603592.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260130090402175.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260130093648234.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260130093913703.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127083731571.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127083810912.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127091016380.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127090822880.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127104038741.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127102158676.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127103237891.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127103412012.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127104602822.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127105230727.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127113258951.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260131162238418.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260131160517697.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260131161339990.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260131161537896.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260131110557523.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260131173400720.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260131170525872.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260131170837349.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260131170922017.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260131171401485.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/wefax_20260131_172925_14070000_gui.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260126195632187.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260126200855541.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260130163305749.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260130214808782.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260130221709877.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260130225514225.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260130230352799.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260130232659258.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260202161257096.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260202163454571.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260202163627331.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260120215045112.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260120215135869.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260120174548168.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260120175116833.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260120175239240.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260120174756795.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127194417817.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127212755525.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260127213213508.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260131212025213.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image_301x33.png">
+<meta property="og:image" content="https://ax01otl.github.io/posts/MP3/image-20260202205408477.png">
+<meta property="article:published_time" content="2026-03-19T04:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-19T05:03:58.588Z">
+<meta property="article:author" content="Ax01otl">
+<meta property="article:tag" content="\- MP3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ax01otl.github.io/posts/MP3/image-20260129154122064.png">
+
+
+<link rel="canonical" href="https://ax01otl.github.io/posts/MP3/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ax01otl.github.io/posts/MP3/","path":"posts/MP3/","title":"MP3"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>MP3 | Ax01otl's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" integrity="sha256-UF1fgpAiu3tPJN/uCqEUHNe7pnr+QR0SQDNfgglgtcM=" crossorigin="anonymous">
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Ax01otl's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80%E9%9F%B3%E9%A2%91%E7%9F%A5%E8%AF%86%E7%82%B9%E6%B1%87%E6%80%BB"><span class="nav-number">1.</span> <span class="nav-text"> 前言&#x2F;音频知识点汇总</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#wav%E6%96%87%E4%BB%B6%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">1.1.</span> <span class="nav-text"> WAV文件基础知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#mp3%E6%96%87%E4%BB%B6%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="nav-number">1.2.</span> <span class="nav-text"> MP3文件基础知识点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%AC%E9%9F%B3%E9%A2%91%E6%9C%AC%E8%BA%AB"><span class="nav-number">2.</span> <span class="nav-text"> 听音频本身</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AB%8B%E4%BD%93%E5%A3%B0%E9%81%93%E9%9A%90%E5%86%99"><span class="nav-number">2.1.</span> <span class="nav-text"> 立体声道隐写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%80%92%E6%94%BE%E9%9F%B3%E9%A2%91"><span class="nav-number">2.2.</span> <span class="nav-text"> 倒放音频</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%89%E9%94%AE%E5%BC%8F%E7%94%B5%E8%AF%9D"><span class="nav-number">2.3.</span> <span class="nav-text"> 按键式电话</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9F%B3%E9%A2%91%E7%9A%84%E7%9B%B8%E5%85%B3%E5%8F%82%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text"> 音频的相关参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#spectrogram%E6%97%B6%E9%A2%91%E8%B0%B1%E5%9B%BE"><span class="nav-number">3.1.</span> <span class="nav-text"> Spectrogram时频谱图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%87%87%E6%A0%B7%E7%8E%87"><span class="nav-number">3.2.</span> <span class="nav-text"> 采样率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A2%E5%BD%A2%E9%9A%90%E5%86%99"><span class="nav-number">3.3.</span> <span class="nav-text"> 波形隐写</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9F%B3%E9%A2%91%E7%9A%84%E8%B0%83%E5%88%B6%E4%B8%8E%E8%A7%A3%E7%A0%81"><span class="nav-number">4.</span> <span class="nav-text"> 音频的调制与解码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E7%BA%BF%E7%94%B5%E5%9B%BA%E5%AE%9A%E7%A0%81%E4%BF%A1%E6%81%AF%E5%88%86%E6%9E%90pt226x-pt224x"><span class="nav-number">4.1.</span> <span class="nav-text"> 无线电固定码信息分析（PT226X &#x2F; PT224X）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pt226x"><span class="nav-number">4.1.1.</span> <span class="nav-text"> PT226X</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pt224x"><span class="nav-number">4.1.2.</span> <span class="nav-text"> PT224X</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#afsk1200%E8%B0%83%E5%88%B6"><span class="nav-number">4.2.</span> <span class="nav-text"> AFSK1200调制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#afsk-%E5%92%8C-bfsk-%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">4.2.1.</span> <span class="nav-text"> AFSK 和 BFSK 的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sstv%E8%A7%A3%E7%A0%81"><span class="nav-number">4.3.</span> <span class="nav-text"> SSTV解码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#mmsstv"><span class="nav-number">4.3.1.</span> <span class="nav-text"> MMSSTV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rx-sstv"><span class="nav-number">4.3.2.</span> <span class="nav-text"> RX-SSTV</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wefax%E8%A7%A3%E7%A0%81ffmpegfldigi"><span class="nav-number">4.4.</span> <span class="nav-text"> WEFAX解码(ffmpeg&amp;fldigi)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9F%B3%E9%A2%91%E4%B8%AD%E7%9A%84%E9%9A%90%E5%86%99"><span class="nav-number">5.</span> <span class="nav-text"> 音频中的隐写</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#mp3stego"><span class="nav-number">5.1.</span> <span class="nav-text"> MP3Stego</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#stegolsb"><span class="nav-number">5.2.</span> <span class="nav-text"> Stegolsb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deegger-embedder"><span class="nav-number">5.3.</span> <span class="nav-text"> DeEgger Embedder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#silenteye"><span class="nav-number">5.4.</span> <span class="nav-text"> SilentEye</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#deepsound"><span class="nav-number">5.5.</span> <span class="nav-text"> DeepSound</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%9F%B3%E9%A2%91%E6%96%87%E4%BB%B6%E6%9E%84%E6%88%90"><span class="nav-number">6.</span> <span class="nav-text"> 音频文件构成</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#copyright%E4%BD%8D%E9%9A%90%E5%86%99"><span class="nav-number">6.1.</span> <span class="nav-text"> Copyright位隐写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#private%E4%BD%8D%E9%9A%90%E5%86%99"><span class="nav-number">6.2.</span> <span class="nav-text"> Private位隐写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#original%E4%BD%8D%E9%9A%90%E5%86%99"><span class="nav-number">6.3.</span> <span class="nav-text"> Original位隐写</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%9C%89%E5%85%B3%E9%9F%B3%E9%A2%91%E7%9A%84%E7%89%B9%E6%80%A7"><span class="nav-number">7.</span> <span class="nav-text"> 其他有关音频的特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#velato-%E7%BC%96%E8%AF%91mid"><span class="nav-number">7.1.</span> <span class="nav-text"> Velato 编译（Mid）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ax01otl</p>
+  <div class="site-description" itemprop="description">Self Learning Log</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://ax01otl.github.io/posts/MP3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ax01otl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ax01otl's Blog">
+      <meta itemprop="description" content="Self Learning Log">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="MP3 | Ax01otl's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          MP3
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-03-19 12:00:00 / 修改时间：13:03:58" itemprop="dateCreated datePublished" datetime="2026-03-19T12:00:00+08:00">2026-03-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/MISC/" itemprop="url" rel="index"><span itemprop="name">\- MISC</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h1 id="前言音频知识点汇总"><a class="markdownIt-Anchor" href="#前言音频知识点汇总"></a> 前言/音频知识点汇总</h1>
+<p>音乐理论学习仓库：<a target="_blank" rel="noopener" href="https://github.com/BenzLeung/benz-audio-engine">GitHub - BenzLeung/benz-audio-engine: 一个简单的基于 Web Audio API 的音效引擎</a></p>
+<p>小demo：<a target="_blank" rel="noopener" href="https://benzleung.github.io/web-audio-api-mini-guide/">Web Audio API 小教程</a></p>
+<ul>
+<li>音频文件分析思路
+<ul>
+<li>直接听音乐：左右声道有无区别？（立体声）是否是很奇怪的呲呲声？（SSTV/波形隐写/AFSK）</li>
+<li>Audacity频域分析看波形是否有隐藏信息/不同采样率下有没有隐藏信息</li>
+<li>查看封面图片是否涉及图片隐写</li>
+<li>查看文件属性隐藏信息</li>
+<li>常用的工具加密？MP3 → MP3Stego / WAV → Stegolsb</li>
+<li>查看帧头的特殊位有无隐写（copyright/private/original）</li>
+</ul>
+</li>
+</ul>
+<h2 id="wav文件基础知识点"><a class="markdownIt-Anchor" href="#wav文件基础知识点"></a> WAV文件基础知识点</h2>
+<ul>
+<li>
+<p>PCM（Pulse Code Modulation，脉冲编码调制）就是把连续的模拟声音波形用数字方式直接采样、量化后存起来的最朴素音频表示。是WAVE 里 <code>data</code> chunk 里最常见的一种<strong>音频数据编码方式</strong></p>
+</li>
+<li>
+<p>**RIFF（Resource Interchange File Format）**是微软/IBM 的一种容器格式规范（文件打包方式），核心思想是：文件由很多块（chunk）组成，每块都有 <strong>类型 + 长度 + 数据</strong>。</p>
+</li>
+<li>
+<p>WAV 本质上是 <strong>RIFF 容器</strong>里装的音频数据（最常见是 PCM）。它的结构可以理解成：<strong>一个文件头 + 一堆 chunk（块）</strong>，每个块都有自己的类型和长度。</p>
+</li>
+</ul>
+<p><strong>（1）RIFF/WAVE 文件头总体结构（文件最开始 12 字节）</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>偏移</th>
+<th>长度</th>
+<th>类型/端序</th>
+<th>典型值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RIFF ID</td>
+<td>0x00</td>
+<td>4</td>
+<td>ASCII</td>
+<td><code>&quot;RIFF&quot;</code></td>
+<td>声明是 RIFF 容器</td>
+</tr>
+<tr>
+<td>RIFF ChunkSize</td>
+<td>0x04</td>
+<td>4</td>
+<td>uint32 LE</td>
+<td>文件大小-8</td>
+<td>从 0x08 到 EOF 的字节数（不含前 8 字节）</td>
+</tr>
+<tr>
+<td>WAVE ID</td>
+<td>0x08</td>
+<td>4</td>
+<td>ASCII</td>
+<td><code>&quot;WAVE&quot;</code></td>
+<td>声明这是 WAVE 类型的 RIFF</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>从 0x0C 开始是一串子块（SubChunk），常见顺序：<code>fmt </code>（必有）→（可选 <code>fact</code>/<code>LIST</code>/<code>bext</code>/<code>iXML</code> …）→ <code>data</code>（必有）</p>
+</blockquote>
+<hr />
+<p><img src="image-20260129154122064.png" alt="image-20260129154122064" /></p>
+<p><strong>（2）通用 Chunk 结构（适用于 fmt/data/LIST/fact 等所有块）</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>位置</th>
+<th>长度</th>
+<th>类型/端序</th>
+<th>示例</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ChunkID</td>
+<td>chunk 起始</td>
+<td>4</td>
+<td>ASCII</td>
+<td><code>&quot;fmt &quot;</code> / <code>&quot;data&quot;</code></td>
+<td>块类型</td>
+</tr>
+<tr>
+<td>ChunkSize</td>
+<td>ChunkID 后</td>
+<td>4</td>
+<td>uint32 LE</td>
+<td>16 / N</td>
+<td>ChunkData 的字节数</td>
+</tr>
+<tr>
+<td>ChunkData</td>
+<td>ChunkSize 后</td>
+<td>ChunkSize</td>
+<td>bytes</td>
+<td>…</td>
+<td>块内容</td>
+</tr>
+</tbody>
+</table>
+<p>对齐规则（很关键）：</p>
+<table>
+<thead>
+<tr>
+<th>规则</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>若 ChunkSize 为奇数</td>
+<td>末尾通常补 1 字节 <code>pad</code> 以保证下一个 chunk 从偶数地址开始（对齐用，不计入 ChunkSize）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ul>
+<li>
+<p><code>fmt </code> 块（PCM 最常见；描述怎么解码音频）</p>
+<p><img src="image-20260129154754813.png" alt="image-20260129154754813" /></p>
+<p>【1】<code>fmt </code> chunk 头</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>相对 fmt 起始偏移</th>
+<th>长度</th>
+<th>类型/端序</th>
+<th>典型值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ChunkID</td>
+<td>+0x00</td>
+<td>4</td>
+<td>ASCII</td>
+<td><code>&quot;fmt &quot;</code></td>
+<td>格式块标识（注意有空格）</td>
+</tr>
+<tr>
+<td>ChunkSize</td>
+<td>+0x04</td>
+<td>4</td>
+<td>uint32 LE</td>
+<td>16（PCM）</td>
+<td>fmt 数据长度；PCM 通常为 16，扩展格式可能更大</td>
+</tr>
+</tbody>
+</table>
+<p>​	【2】PCM（ChunkSize=16）标准字段（小端）</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>相对 fmt 数据区偏移</th>
+<th>长度</th>
+<th>类型/端序</th>
+<th>典型值</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AudioFormat/wFormatTag</td>
+<td>+0x08</td>
+<td>2</td>
+<td>uint16 LE</td>
+<td>1 / 3 / 0xFFFE</td>
+<td>编码格式：1=PCM；3=IEEE float；0xFFFE=Extensible</td>
+</tr>
+<tr>
+<td>NumChannels/wChannels</td>
+<td>+0x0A</td>
+<td>2</td>
+<td>uint16 LE</td>
+<td>1/2</td>
+<td>声道数</td>
+</tr>
+<tr>
+<td>SampleRate</td>
+<td>+0x0C</td>
+<td>4</td>
+<td>uint32 LE</td>
+<td>44100/48000</td>
+<td>采样率（Hz）</td>
+</tr>
+<tr>
+<td>ByteRate</td>
+<td>+0x10</td>
+<td>4</td>
+<td>uint32 LE</td>
+<td>176400 等</td>
+<td>平均字节率：<code>SampleRate * NumChannels * BitsPerSample/8</code></td>
+</tr>
+<tr>
+<td>BlockAlign</td>
+<td>+0x14</td>
+<td>2</td>
+<td>uint16 LE</td>
+<td>2/4/6…</td>
+<td>每个“采样帧”字节数：<code>NumChannels * BitsPerSample/8</code></td>
+</tr>
+<tr>
+<td>BitsPerSample</td>
+<td>+0x16</td>
+<td>2</td>
+<td>uint16 LE</td>
+<td>8/16/24/32</td>
+<td>位深（每声道每采样点的 bit 数）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>​	【3】<code>fmt </code> 扩展（WAVE_FORMAT_EXTENSIBLE，AudioFormat=0xFFFE 时常见）</p>
+<blockquote>
+<p>这是“普通 WAV”里也很常见的一种：外壳是 Extensible，但 SubFormat 指向 PCM 或 float。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>位置</th>
+<th>长度</th>
+<th>类型/端序</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cbSize</td>
+<td>紧跟 BitsPerSample 后</td>
+<td>2</td>
+<td>uint16 LE</td>
+<td>扩展区长度（后续扩展字段大小）</td>
+</tr>
+<tr>
+<td>ValidBitsPerSample</td>
+<td>后续</td>
+<td>2</td>
+<td>uint16 LE</td>
+<td>有效位数（常等于 BitsPerSample）</td>
+</tr>
+<tr>
+<td>ChannelMask</td>
+<td>后续</td>
+<td>4</td>
+<td>uint32 LE</td>
+<td>声道布局位掩码（例如哪一声道是 L/R/C/LFE…）</td>
+</tr>
+<tr>
+<td>SubFormat</td>
+<td>后续</td>
+<td>16</td>
+<td>GUID</td>
+<td>真正编码类型（例如 PCM / IEEE float）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ul>
+<li><code>data</code> 块（真正的采样数据）</li>
+</ul>
+<p><img src="image-20260129155041590.png" alt="image-20260129155041590" /></p>
+<p>【这里可以看到每个采样点samples[i]都是16位，这意味着文件的采样点位深（每个采样点的精度）就是16bit：这个数值的大小就是采样点的原始幅度值，即表示波形】</p>
+<p><strong>（wav文件的lsb隐写就出自这每一个采样点）</strong></p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>相对 data 起始偏移</th>
+<th>长度</th>
+<th>类型/端序</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ChunkID</td>
+<td>+0x00</td>
+<td>4</td>
+<td>ASCII</td>
+<td><code>&quot;data&quot;</code></td>
+</tr>
+<tr>
+<td>ChunkSize</td>
+<td>+0x04</td>
+<td>4</td>
+<td>uint32 LE</td>
+<td>音频数据字节数</td>
+</tr>
+<tr>
+<td>ChunkData</td>
+<td>+0x08</td>
+<td>ChunkSize</td>
+<td>bytes</td>
+<td>连续采样数据</td>
+</tr>
+</tbody>
+</table>
+<p>采样排列与数值规则（知识点）：</p>
+<table>
+<thead>
+<tr>
+<th>规则</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>多声道交错（interleaved）</td>
+<td>立体声：<code>L0 R0 L1 R1 ...</code>（按帧交错）</td>
+</tr>
+<tr>
+<td>小端存储</td>
+<td>16-bit PCM：低字节在前（LE）</td>
+</tr>
+<tr>
+<td>8-bit PCM 常为无符号</td>
+<td>0~255，128 作为“零点”</td>
+</tr>
+<tr>
+<td>16/24/32-bit PCM 常为有符号</td>
+<td>二补码表示（0 为中心）</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<ul>
+<li>可选块（了解即可，做题时经常是“藏东西的地方”）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>ChunkID</th>
+<th>常见出现时机</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fact</code></td>
+<td>压缩/非 PCM 更常见</td>
+<td>存放样本数等信息（PCM 通常没有）</td>
+</tr>
+<tr>
+<td><code>LIST</code></td>
+<td>任何格式可能有</td>
+<td>元数据列表（作者、软件、注释…）</td>
+</tr>
+<tr>
+<td><code>bext</code></td>
+<td>广播/制作流程常见</td>
+<td>广播扩展元数据（时间码、描述等）</td>
+</tr>
+<tr>
+<td><code>iXML</code></td>
+<td>专业录音流程常见</td>
+<td>XML 形式元数据（设备/场记信息等）</td>
+</tr>
+<tr>
+<td><code>JUNK</code></td>
+<td>对齐/占位</td>
+<td>占位填充，方便后续编辑</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="mp3文件基础知识点"><a class="markdownIt-Anchor" href="#mp3文件基础知识点"></a> MP3文件基础知识点</h2>
+<p><strong>1）MP3文件整体结构</strong></p>
+<ul>
+<li>
+<p><code>[可选：ID3v2 标签(文件头)] → [一串 MPEG Audio Frame（主体）] → [可选：ID3v1/APE 等标签(文件尾)]</code></p>
+<p><img src="image-20260120162333404.png" alt="image-20260120162333404" /></p>
+<p><img src="image-20260120162437421.png" alt="image-20260120162437421" /></p>
+</li>
+<li>
+<p>看到 <code>FF FB/FF FA</code> 基本就是音频帧开始（同步字 0xFFF…）。</p>
+</li>
+</ul>
+<p><strong>2）头部标签（内涵多个信息）</strong></p>
+<ul>
+<li>
+<p><strong>ID3v2</strong>：文件开头 <code>49 44 33</code>（ASCII <code>ID3</code>）</p>
+<ul>
+<li>
+<p>size=4B <strong>synchsafe</strong>（常被 CTF 做手脚：写大/写小导致解析错位）</p>
+</li>
+<li>
+<p>常见帧：</p>
+<ul>
+<li>
+<p><code>TXXX</code> 自定义文本（最常塞“key/flag/提示”）</p>
+</li>
+<li>
+<p><code>COMM</code> 注释</p>
+</li>
+<li>
+<p><code>APIC</code> 封面图（里面直接塞 JPG/PNG）</p>
+<p><img src="image-20260120162644011.png" alt="image-20260120162644011" /></p>
+</li>
+<li>
+<p><code>TSSE</code> 编码器信息</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>快速定位：在 0~ID3 区间搜字符串 <code>TXXX</code>/<code>COMM</code>/<code>APIC</code> 或搜 <code>image/jpeg</code>、<code>image/png</code>。</p>
+</li>
+</ul>
+<p><strong>3）音频主体（按帧走，方便定位插入/断点）【最常见的隐写都发生在帧头4字节中】</strong></p>
+<ul>
+<li>
+<p>每帧：<code>Header(4B)</code> +（可选CRC）+ side info + main data</p>
+</li>
+<li>
+<p>帧头常见开头：<code>FF FB</code>（MPEG1 Layer3 无CRC 常见）</p>
+</li>
+<li>
+<p><strong>帧长跳转（MPEG1 L3）</strong>：<code>len = floor(144 * bitrate / sample_rate) + padding</code></p>
+<ul>
+<li>靠这个验证文件是否“真连续帧”，有没有插垃圾数据/隐藏区。</li>
+</ul>
+</li>
+<li>
+<p><strong>private 位（private_bit）</strong> 指的是 <strong>MP3 每个音频帧帧头（Frame Header）里的 1 个保留/私有用途比特</strong>。它的含义很朴素：<strong>标准不规定它怎么用，留给实现者/应用自己用</strong>。固定为第三个字节的最低为（bit0），可以通过<code>B[2]&amp;0x01</code>获得；有可能会在这里隐藏信息。</p>
+<p><img src="image-20260120170209189.png" alt="image-20260120170209189" /></p>
+</li>
+<li>
+<p>Copyright 位， <strong>MP3 音频帧（MPEG Audio Frame）头部里的 1 个比特位</strong>，用于声明是否受版权保护</p>
+<ul>
+<li>
+<p><strong>位于帧头第 4 个字节（header[3]）的 bit3（掩码 0x08）</strong></p>
+</li>
+<li>
+<p><strong>这一位一般不会有0有1，除非是多段不同的音频拼接的</strong></p>
+</li>
+<li>
+<p>MP3 每个音频帧头都有 <strong>4 字节 Frame Header（32 bit）</strong></p>
+</li>
+<li>
+<p>typedef FrameHeader</p>
+<p>{</p>
+<p>// 前两字节 header[0-1]</p>
+<p>unsigned int sync:12;            //同步信息，表示一帧数据的开始</p>
+<p>unsigned int id:1;           //算法标识位</p>
+<p>unsigned int layer: 2;              //层</p>
+<p>unsigned int error protection:1;      // CRC校验</p>
+<p>// 第三字节 header[2]</p>
+<p>unsigned int bitrate_index:4;        //位率</p>
+<p>unsigned int sampling_frequency:2;     //采样频率</p>
+<p><strong>unsigned int padding:1;          //填充位，帧长调节</strong></p>
+<p><strong>unsigned int private:1;            //保留字</strong></p>
+<p>// 第四字节 header[3]</p>
+<p>unsigned int mode:2;             //声道模式</p>
+<p>unsigned int mode extension:2;    //扩充模式</p>
+<p><strong>unsigned int copyright:1;              // 版权位：C语言写好像是bit4，但是实际排布是76···10（bit3）</strong></p>
+<p>unsigned int original:1;           //原版标志</p>
+<p>unsigned int emphasis:2;         //强调模式</p>
+<p>}</p>
+<p><strong>所有的Mp3文件的数据帧开始的两个字节必需是“FF FA”或者 “FF FB”</strong></p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>长度 (bit)</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>syncword</td>
+<td>12</td>
+<td>同步头，表示一帧数据的开始，共 12 位，全 1 即 0xFFF</td>
+</tr>
+<tr>
+<td>ID</td>
+<td>1</td>
+<td>算法标识位，“1” 表示 MPEG 音频</td>
+</tr>
+<tr>
+<td>layer</td>
+<td>2</td>
+<td>用来说明是哪一层编码</td>
+</tr>
+<tr>
+<td>protection_bit</td>
+<td>1</td>
+<td>用来表明冗余信息是否被加到音频流中，以进行错误检测和错误隐蔽；“1” 是未增加，“0” 是增加</td>
+</tr>
+<tr>
+<td>bitrate_index</td>
+<td>4</td>
+<td>用来指示该帧的 bitrate</td>
+</tr>
+<tr>
+<td>sampling_frequency</td>
+<td>2</td>
+<td>用来指示采样频率</td>
+</tr>
+<tr>
+<td><strong>padding_bit</strong></td>
+<td><strong>1</strong></td>
+<td><strong>如果该位为 1，那么帧中包含一个额外槽，用于把平均位率调节到采样频率，否则该位必须为 0</strong></td>
+</tr>
+<tr>
+<td><strong>private_bit</strong></td>
+<td><strong>1</strong></td>
+<td><strong>留做私用</strong></td>
+</tr>
+<tr>
+<td>mode</td>
+<td>2</td>
+<td>定义通道模式</td>
+</tr>
+<tr>
+<td>mode_extension</td>
+<td>2</td>
+<td>用来标识采用了哪一种 joint_stereo</td>
+</tr>
+<tr>
+<td><strong>copyright</strong></td>
+<td><strong>1</strong></td>
+<td><strong>表明版权用，“1” 表示有版权，“0” 表示没有版权</strong></td>
+</tr>
+<tr>
+<td><strong>original/home</strong></td>
+<td><strong>1</strong></td>
+<td><strong>表明原版还是复制，“1” 表示原版，“0” 表示复制</strong></td>
+</tr>
+<tr>
+<td>emphasis</td>
+<td>2</td>
+<td>表明加重音类型</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>4）第一帧里的“Info/Xing/LAME”（常见但也能藏）</strong></p>
+<ul>
+<li>在第一帧 main data 里可能出现 <code>Xing</code>/<code>Info</code>/<code>LAME</code>（时长/seek/编码器）。</li>
+<li>也常被用作“伪装点”或藏少量字符串。</li>
+</ul>
+<p><strong>5）尾部标签</strong></p>
+<ul>
+<li><strong>ID3v1</strong>：文件末尾 128B 有 <code>54 41 47</code>（<code>TAG</code>）</li>
+<li><strong>APEv2</strong>：尾部知道 <code>APETAGEX</code>，键值对；可能有 <code>Cover Art (Front)</code>（封面）</li>
+</ul>
+<p><strong>6）MISC 常用“搜签名”思路</strong></p>
+<ul>
+<li>直接在 MP3 里搜这些魔数/字符串定位隐藏内容：
+<ul>
+<li><code>ID3</code>, <code>TXXX</code>, <code>COMM</code>, <code>APIC</code>, <code>APETAGEX</code>, <code>TAG</code></li>
+<li>JPG：<code>FF D8 FF</code>；PNG：<code>89 50 4E 47 0D 0A 1A 0A</code></li>
+<li>base64 特征：大量 <code>[A-Za-z0-9+/]</code> 且末尾 <code>=</code>/<code>==</code></li>
+</ul>
+</li>
+<li>封面通常在 <code>APIC</code>，提取后再做 stego/strings/zsteg/LSB/EXIF 等。</li>
+</ul>
+<h1 id="听音频本身"><a class="markdownIt-Anchor" href="#听音频本身"></a> 听音频本身</h1>
+<h2 id="立体声道隐写"><a class="markdownIt-Anchor" href="#立体声道隐写"></a> 立体声道隐写</h2>
+<p><strong>[BaseCTF2024]捂住X只耳</strong></p>
+<p><strong>题目特征：双声道，左右两边声音有细微差距（不一定能听出来）</strong></p>
+<hr />
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">立体声只表示音频有两个声道：左(L)和右(R)。</span><br><span class="line">至于这两个声道里的内容是不是不同，要看制作/题目怎么做。</span><br><span class="line"></span><br><span class="line">更准确地说：</span><br><span class="line"></span><br><span class="line">正常音乐的立体声：L/R 往往很像但不完全一样。比如鼓在中间（两边都有），吉他偏左，人声居中……所以两边会有差异，用来营造空间感。</span><br><span class="line"></span><br><span class="line">纯单声道复制成立体声：L = R，左右完全一样，只是存成两声道。</span><br><span class="line"></span><br><span class="line">这道题的套路：背景部分基本是“近似 L≈R”（或大部分相同），然后把隐藏信号主要塞在某一边或塞进差分(L-R)里。这样你做 反相+叠加（相当于 L-R）时，共同的背景会被抵消，差异（隐藏信号）会显得特别明显。</span><br></pre></td></tr></table></figure>
+<p>该题可视为一种基于双声道差分的音频隐写与线性提取过程，而非传统意义上的密钥体制加密。设背景音频信号为 <em><strong>B(t)</strong></em>，其在左右声道中占主导且近似同相同幅（即“居中”成分）；设待嵌入的隐藏信息为 <em><strong>S(t)</strong></em>，其时域形态表现为离散的短脉冲序列（可对应摩斯码点划）。一种常见嵌入模型为</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mi>B</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>+</mo><mi>S</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mi>R</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mi>B</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">L(t)=B(t)+S(t),\qquad R(t)=B(t),
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">L</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mpunct">,</span></span></span></span></span></p>
+<p>其中 <em><strong>L(t)</strong></em> 与 <em><strong>R(t)</strong></em> 分别表示左、右声道信号。由于 <em><strong>S(t)</strong></em> 的幅度通常远小于 <em><strong>B(t)</strong></em>，在直接监听或常规播放的混合感知中，<em><strong>S(t)</strong></em> 易被 <em><strong>B(t)</strong></em> 的能量掩蔽而难以辨识。</p>
+<p>解码阶段利用线性系统的叠加性与相位反转操作：对右声道进行相位反转（即乘以 <em><strong>-1</strong></em>）并与左声道做线性合成，相当于计算差分</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>+</mo><mo stretchy="false">(</mo><mo>−</mo><mi>R</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>=</mo><mo stretchy="false">(</mo><mi>B</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>+</mo><mi>S</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo>−</mo><mi>B</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mi>S</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi></mrow><annotation encoding="application/x-tex">L(t)+(-R(t))=(B(t)+S(t)) - B(t)=S(t).
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">L</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mord">.</span></span></span></span></span></p>
+<p>因此，左右声道共有的“共模”成分 <em><strong>B(t)</strong></em> 在差分运算中被抵消，仅保留两声道差异项 <em><strong>S(t)</strong></em>，从而使隐藏脉冲在特定时间段（例如 45 秒后）显著凸显。上述机制对应信号处理中的“相位反转”与“共模抑制（common-mode cancellation）”思想，其核心在于将信息承载于双声道之间的差异结构，而非对音频内容施加某种密钥驱动的非线性变换。</p>
+<p>同一思路还存在对称嵌入的变体，例如</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mi>B</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>+</mo><mi>S</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mi>R</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mi>B</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>−</mo><mi>S</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">L(t)=B(t)+S(t),\qquad R(t)=B(t)-S(t),
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">L</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mpunct">,</span></span></span></span></span></p>
+<p>则有</p>
+<p class='katex-block'><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>L</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>−</mo><mi>R</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>2</mn><mi>S</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mspace width="2em"/><mi>L</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>+</mo><mi>R</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo>=</mo><mn>2</mn><mi>B</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow><annotation encoding="application/x-tex">L(t)-R(t)=2S(t),\qquad L(t)+R(t)=2B(t),
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">L</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:2em;"></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal">L</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.00773em;">R</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.05017em;">B</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mpunct">,</span></span></span></span></span></p>
+<p>差分可进一步增强隐藏信号幅度，而和分量可更纯净地表征背景。</p>
+<p>​	综上，本题的技术要点可概括为：<strong>将消息编码为脉冲序列并嵌入到左右声道的差分项中；解题通过相位反转与混音求差实现共模抵消，从而恢复隐藏信号并完成译码</strong>。</p>
+<hr />
+<p>首先分离两个音道到不同的轨道上</p>
+<p><img src="image-20260125084858485.png" alt="image-20260125084858485" /></p>
+<p>双击（全选）右声道（或左声道）的波形图，点击 效果器 → 反相，将波形上下颠倒：</p>
+<p><img src="image-20260125085356160.png" alt="image-20260125085356160" /></p>
+<p>回到多轨会话，播放可发现前 45 秒无声⾳，45 秒开始有嘟嘟声。</p>
+<p><img src="image-20260125090405826.png" alt="image-20260125090405826" /></p>
+<p>将多轨混音导出音频，然后再导入、放大音量即可看到长短音（直观看波形）：</p>
+<p><img src="image-20260125090554181.png" alt="image-20260125090554181" /></p>
+<p><img src="image-20260125090700650.png" alt="image-20260125090700650" /></p>
+<p><img src="image-20260125090816334.png" alt="image-20260125090816334" /></p>
+<p>然后手动记录摩斯电码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">..-. --- .-.. .-.. --- .-- -.-- --- ..- .-. .... . .- .-. -</span><br></pre></td></tr></table></figure>
+<p>解码获得flag</p>
+<p><img src="image-20260125091408187.png" alt="image-20260125091408187" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Space → 空格：&quot; &quot;（0x20）</span><br><span class="line">Line feed → 换行 LF：\n（Unix/Linux 常用行结束，0x0A）</span><br><span class="line">CRLF → 回车+换行：\r\n（Windows 常用行结束，0x0D 0x0A）</span><br><span class="line">Forward slash → 正斜杠：/（0x2F）</span><br><span class="line">Backslash → 反斜杠：\（0x5C）</span><br><span class="line">Comma → 逗号：,（0x2C）</span><br><span class="line">Semi-colon → 分号：;（0x3B）</span><br><span class="line">Colon → 冒号：:（0x3A）</span><br></pre></td></tr></table></figure>
+<h2 id="倒放音频"><a class="markdownIt-Anchor" href="#倒放音频"></a> 倒放音频</h2>
+<p><strong>题目特征：听起来就像是什么东西倒放的好吧😅</strong></p>
+<p>题目来源：<a target="_blank" rel="noopener" href="https://ctf.bugku.com/challenges/detail/id/569.html">bugku-我们生活在南京-1</a></p>
+<p>题目描述：他们用无线电中惯用的方法区分字符串中读音相近的字母。</p>
+<p>直接在Audacity中倒放即可：首先ctrl + A全选音频</p>
+<p><img src="image-20260128215621087.png" alt="image-20260128215621087" /></p>
+<p>能听出来是一个个念英文字母，按照提示找密码表（每个Code Word对应一个英文字母）</p>
+<p><img src="19716-20241005091606857-659104030.webp" alt="image" /></p>
+<p>拼接结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;radiowavesacrosstime&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="按键式电话"><a class="markdownIt-Anchor" href="#按键式电话"></a> 按键式电话</h2>
+<p><strong>题目特征：听起来就像是在按键拨号</strong></p>
+<p>题目来源：<a target="_blank" rel="noopener" href="https://ctf.bugku.com/challenges/detail/id/844.html">Bugku-Hear Me Out</a></p>
+<p><img src="image-20260202081741111.png" alt="image-20260202081741111" /></p>
+<p><a target="_blank" rel="noopener" href="https://unframework.github.io/dtmf-detect/">在线网站</a>&amp;&amp;[本地部署](file://D:/MiscTools/Decoder/DTMF/dtmf-detect-master/index.html)</p>
+<p>DTMF 音调转换为<code>44422226684433277788</code></p>
+<p>【这个音调转换为按键的原理就是每一个按键的声音都是由两个频率的音频合成出来的：这一点在Grid网格界面看得格外明显】</p>
+<p><img src="image-20260202094955158.png" alt="image-20260202094955158" /></p>
+<p>然后使用按键解码网站(<a target="_blank" rel="noopener" href="https://www.dcode.fr/multitap-abc-cipher">SMS Phone Tap Code Cipher (Multitap Mode) Translator - Online Decoder</a>)解码即可：</p>
+<p><img src="image-20260202084752056.png" alt="image-20260202084752056" /></p>
+<blockquote>
+<p>解码原理：</p>
+<p><strong>把数字键盘当作一个分组字母表</strong>，同一个数字键重复的次数 = 选择该键上第几个字母。</p>
+<p>标准手机九宫格映射（最常见的 multi-tap）：</p>
+<ul>
+<li>2 → ABC（按 1 次 A，2 次 B，3 次 C）</li>
+<li>3 → DEF</li>
+<li>4 → GHI</li>
+<li>5 → JKL</li>
+<li>6 → MNO</li>
+<li>7 → PQRS（最多 4 次）</li>
+<li>8 → TUV</li>
+<li>9 → WXYZ（最多 4 次)</li>
+</ul>
+</blockquote>
+<ul>
+<li>因此本地写的解码脚本出来上面的数字，还需要注意连续输入数字的间隔：比如这个输入的间隔用空格间隔的话就是<code>444 222 2 66 8 44 33 2 777 88</code>。本地部署（尽量使用空格间隔）[Multi-tap（离线本地版）](file:///D:/MiscTools/Decoder/Multitap/multitap.html)</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gigem&#123;ICANTHEARU&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="音频的相关参数"><a class="markdownIt-Anchor" href="#音频的相关参数"></a> 音频的相关参数</h1>
+<h2 id="spectrogram时频谱图"><a class="markdownIt-Anchor" href="#spectrogram时频谱图"></a> Spectrogram时频谱图</h2>
+<p><strong>题目特征：ziwa乱叫，听着就像是摩斯密码</strong></p>
+<p>题目来源：<a target="_blank" rel="noopener" href="https://ctf.bugku.com/challenges/detail/id/570.html">bugku-我们生活在南京-2</a></p>
+<ul>
+<li>打开多视图，查看时频谱图</li>
+</ul>
+<p><img src="image-20260128220556295.png" alt="image-20260128220556295" /></p>
+<ul>
+<li>可以看到明显的间隔，以及规律的有粗有细可以代表摩斯密码的长短音</li>
+</ul>
+<p><img src="image-20260128220730873.png" alt="image-20260128220730873" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">1.上面那块蓝色波形</span><br><span class="line">·这是时域波形（amplitude vs time）：横轴是时间，纵轴是振幅（-1 到 1 这种归一化值）。</span><br><span class="line">·能看出哪里声音大（波形胖）、哪里安静（接近 0）。</span><br><span class="line"></span><br><span class="line">2.下面那块彩色时频谱图</span><br><span class="line">·这是时频谱图/频谱（spectrogram）：横轴还是时间，但纵轴变成了频率（图上左边有 100、1000、2700、5000、10000 Hz）。</span><br><span class="line">·颜色表示该频率在那一刻的能量强弱：越亮越强，越暗越弱。</span><br><span class="line">·图里那条横向亮线表示一个持续的固定频率音（类似“载波/蜂鸣”），而竖条状能量变化对应音符/发声片段。</span><br><span class="line">	具体来说图片中线条的含义是：</span><br><span class="line">	（1）一条水平亮线：某个固定频率一直存在（持续的纯音/载波/蜂鸣）。</span><br><span class="line">	（2）竖着一根根的亮条：短促的宽频能量（比如敲击音、爆破音、瞬态），或者某段时间突然出现很多频率成分。</span><br><span class="line">	（3）斜线：频率随时间变化（比如哨声上滑/下滑、调频信号）。</span><br><span class="line">	（4）一串等间距的横线：基频 + 谐波（人声、乐器常见；基频下面一条，整数倍频率上面一条条）。</span><br></pre></td></tr></table></figure>
+<ul>
+<li>手动翻译成摩斯密码就是</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">..-. .-.. .- --. -.-. .-- .. ..... ....- - .-. ....- -.. .. - .. ----- -. -- ...-- - .... ----- -..</span><br><span class="line">→→→→→→解码</span><br><span class="line">FLAGCWI54TR4DITI0NM3TH0D</span><br><span class="line">→→→→→→手动加大括号并转小写</span><br><span class="line">flag&#123;cwi54tr4diti0nm3th0d&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;FLAGCWI54TR4DITI0NM3TH0D&quot;</span>.lower())</span><br></pre></td></tr></table></figure>
+<h2 id="采样率"><a class="markdownIt-Anchor" href="#采样率"></a> 采样率</h2>
+<p><strong>题目特征：听起来正常的音频，没啥特征；但是一般首或尾的音波图有一些奇怪（时频谱图隐写的变种）</strong></p>
+<p>题目来源：攻防世界-intoU</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">采样率（Sample Rate，单位 Hz）指的是：每秒钟对音频波形取多少个采样点。（声音波形/模拟信号→数字信号）</span><br><span class="line">	44100 Hz：每秒采样 44100 次（CD 标准）</span><br><span class="line">	48000 Hz：每秒采样 48000 次（视频/影视常用）</span><br><span class="line">	22050 Hz、16000 Hz：更低采样率，文件更小，但高频细节会少</span><br><span class="line"></span><br><span class="line">它决定什么？</span><br><span class="line">1.最高能表示的频率上限（奈奎斯特定理）【采样率的 Hz 决定每秒有多少数据点；播放/音高的 Hz 决定声音每秒振动多少次。采样率要足够高，才能准确还原想要的频率内容。】</span><br><span class="line">	最高频率 ≈ 采样率的一半</span><br><span class="line">	44100 Hz → 最高约 22050 Hz</span><br><span class="line">	16000 Hz → 最高约 8000 Hz（人声够用，但音乐会“闷”）</span><br><span class="line">2.音质与体积/算力的权衡</span><br><span class="line">	采样率越高，理论上能保留更多高频细节；但数据量也更大。</span><br><span class="line">3.和“比特率/码率”不是一回事</span><br><span class="line">	采样率是“每秒采多少点”；码率是“每秒用多少比特存/传”（和编码器、压缩有关）。</span><br><span class="line">	</span><br><span class="line">Audacity中一般有两个采样率表示：</span><br><span class="line">轨道采样率：这个音轨数据本身用什么采样率表示</span><br><span class="line">项目采样率（Project Rate，窗口底部一般有）：导出/混音时的目标采样率（不一致会被重采样）</span><br><span class="line">【重采样不是Audacity重新采点取样，只是利用已有音频进行数学层面转换】</span><br><span class="line">【改变轨道采样率是改这条轨道的时间刻度/解释方式，因此时频谱图会发生变化；项目采样率仅仅影响导出文件的质量，一般做题的时候用不到改这个】</span><br></pre></td></tr></table></figure>
+<p>【轨道采样率可以直接在当前轨道中查看】</p>
+<p><img src="image-20260129094459720.png" alt="image-20260129094459720" /></p>
+<p>【项目采样率可以在音频设置中查看（一般做题用不到）】</p>
+<p><img src="image-20260129094137260.png" alt="image-20260129094137260" /></p>
+<ul>
+<li>直接看时频谱图的话没有什么特征</li>
+</ul>
+<p><img src="image-20260129093310065.png" alt="image-20260129093310065" /></p>
+<ul>
+<li>但是如果重新设置采样率</li>
+</ul>
+<p><img src="image-20260129093407648.png" alt="image-20260129093407648" /></p>
+<ul>
+<li>轨道采样率设置为900，使得对该轨道的解释方式发生改变，就会发现时频谱图中隐藏的信息</li>
+</ul>
+<p><img src="image-20260129095247073.png" alt="image-20260129095247073" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RCTF&#123;bmp_file_in_wav&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>PS：后来感觉不对劲，为什么能想到调采样率呢？而且<a target="_blank" rel="noopener" href="https://www.cnblogs.com/redHskb/p/14958013.html">这个博客</a>里用到的900Hz已经是一个小的离谱的频率了，一般不会用这个。于是用原采样率去到音频尾部观察时频谱图</li>
+</ul>
+<p><img src="image-20260129100434414.png" alt="image-20260129100434414" /></p>
+<ul>
+<li>额……这不就是普通的时频谱图隐写吗；改一下采样率只是更清晰了而已</li>
+<li><strong>总结：下次音频波形图前后都先看一下，一般两端喜欢隐藏信息</strong></li>
+</ul>
+<h2 id="波形隐写"><a class="markdownIt-Anchor" href="#波形隐写"></a> 波形隐写</h2>
+<p>波形隐写原理就是将波形的高低转为二进制</p>
+<p><strong>题目特征：有规律的波形图，听起来也是噼里啪啦的</strong></p>
+<p>题目来源：<a target="_blank" rel="noopener" href="https://ctf.bugku.com/challenges/detail/id/247.html">2018网鼎杯-3-Unpleasant_music</a></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://yanhuijessica.github.io/Chictf-Writeups/misc/unpleasant_music/#_1">Misc - Unpleasant_music - Chictf-Writeups</a></p>
+<p>【这里重点关注的是前面有关MP3波形隐写的内容】</p>
+<p>直接看就是单音道的一坨波形，时频谱图也没看出来什么东西</p>
+<p><img src="image-20260127222736313.png" alt="image-20260127222736313" /></p>
+<p>放大波形可以看出来是有规律的小幅度与大幅度波，只有两种形式：可以代表0/1</p>
+<p><img src="image-20260127223017498.png" alt="image-20260127223017498" /></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> wave</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">wavfile = wave.<span class="built_in">open</span>(<span class="string">&#x27;music.wav&#x27;</span>, <span class="string">&quot;rb&quot;</span>)</span><br><span class="line"><span class="comment"># 获取 WAV 文件的参数</span></span><br><span class="line">params = wavfile.getparams()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 获取音频的采样点数</span></span><br><span class="line">nframes = params[<span class="number">3</span>]</span><br><span class="line"><span class="comment"># 从 WAV 文件中读取所有帧的数据</span></span><br><span class="line">datawav = wavfile.readframes(nframes)</span><br><span class="line">wavfile.close()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将读取的二进制数据（datawav）转换为一个 NumPy 数组，数据类型为短整型（np.short）</span></span><br><span class="line">datause = np.frombuffer(datawav, dtype=np.short)</span><br><span class="line"></span><br><span class="line">result_bin = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="comment"># 记录当前的最大值</span></span><br><span class="line">mx = <span class="number">0</span></span><br><span class="line"><span class="comment"># 循环遍历 datause 数组，除了最后一个元素</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(datause) - <span class="number">1</span>):</span><br><span class="line">    <span class="comment"># 更新记录最大值的变量 mx</span></span><br><span class="line">    <span class="keyword">if</span> datause[i] &gt; mx:</span><br><span class="line">        mx = datause[i]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 检查当前元素是否为负数且下一个元素为非负数</span></span><br><span class="line">    <span class="comment"># 如果是，这意味着音频波形从负数跨越到0或正数，这可能是隐藏数据的标记点</span></span><br><span class="line">    <span class="keyword">if</span> datause[i] &lt; <span class="number">0</span> &lt;= datause[i + <span class="number">1</span>]:</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 检查从负数到非负数的跨越是否足够大（大于24000）</span></span><br><span class="line">        <span class="comment"># 用于区分隐藏数据位是 &#x27;1&#x27; 还是 &#x27;0&#x27; 的阈值</span></span><br><span class="line">        <span class="keyword">if</span> mx - <span class="number">24000</span> &gt; <span class="number">0</span>:</span><br><span class="line">            result_bin += <span class="string">&#x27;1&#x27;</span></span><br><span class="line">            mx = datause[i + <span class="number">1</span>]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result_bin += <span class="string">&#x27;0&#x27;</span></span><br><span class="line">            mx = datause[i + <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">result_hex = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="comment"># 将二进制数据转换为十六进制</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(result_bin), <span class="number">4</span>):</span><br><span class="line">    result_hex += <span class="built_in">hex</span>(<span class="built_in">int</span>(result_bin[i: i + <span class="number">4</span>], <span class="number">2</span>))[<span class="number">2</span>:]</span><br><span class="line"><span class="built_in">print</span>(result_hex)</span><br></pre></td></tr></table></figure>
+<p>从结果可以看出来是一个rar文件的二进制：</p>
+<p><img src="image-20260127224354054.png" alt="image-20260127224354054" /></p>
+<p>那么既然知道结果是rar文件的话，可以直接修改代码把结果以二进制形式写入rar文件中</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> wave, codecs</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">wavfile =  wave.<span class="built_in">open</span>(<span class="string">u&#x27;music.wav&#x27;</span>,<span class="string">&quot;rb&quot;</span>)</span><br><span class="line">params = wavfile.getparams()</span><br><span class="line">nframes = params[<span class="number">3</span>] <span class="comment"># 采样点数</span></span><br><span class="line">datawav = wavfile.readframes(nframes) <span class="comment"># 读取音频，字符串格式</span></span><br><span class="line">wavfile.close()</span><br><span class="line">datause = np.frombuffer(datawav, dtype=np.int16) <span class="comment"># 将字符串转化为短整型</span></span><br><span class="line"></span><br><span class="line">result_bin, result_hex = <span class="string">&#x27;&#x27;</span>, <span class="string">&#x27;&#x27;</span></span><br><span class="line">mx = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(datause) - <span class="number">1</span>):</span><br><span class="line">    <span class="keyword">if</span> datause[i] &gt; mx:</span><br><span class="line">        mx = datause[i]</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span>(datause[i] &lt; <span class="number">0</span> <span class="keyword">and</span> datause[i+<span class="number">1</span>] &gt;= <span class="number">0</span>):</span><br><span class="line">            <span class="keyword">if</span> (mx - <span class="number">24000</span> &gt; <span class="number">0</span>):</span><br><span class="line">                result_bin += <span class="string">&#x27;1&#x27;</span></span><br><span class="line">                mx = datause[i+<span class="number">1</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                result_bin += <span class="string">&#x27;0&#x27;</span></span><br><span class="line">                mx = datause[i+<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(result_bin), <span class="number">4</span>):</span><br><span class="line">    result_hex += <span class="built_in">hex</span>(<span class="built_in">int</span>(result_bin[i : i + <span class="number">4</span>], <span class="number">2</span>))[<span class="number">2</span>:]</span><br><span class="line"></span><br><span class="line"><span class="comment"># result_hex 开头为 Rar</span></span><br><span class="line">file_rar = <span class="built_in">open</span>(<span class="string">&quot;result.rar&quot;</span>,<span class="string">&quot;wb&quot;</span>)</span><br><span class="line">file_rar.write(codecs.decode(result_hex, <span class="string">&#x27;hex_codec&#x27;</span>))</span><br><span class="line">file_rar.close()</span><br></pre></td></tr></table></figure>
+<p>但是压缩包里的txt文件并没有flag：</p>
+<p><img src="image-20260127224811070.png" alt="image-20260127224811070" /></p>
+<p>【下面是rar文件的一些知识；具体的去压缩包文件那里学习……】</p>
+<ul>
+<li>
+<p>RAR 由可变长的块组成，这些块的没有固定的先后顺序，但要求第一个块必须是标志块并且其后紧跟一个归档头部块。每个块均以以下字段开头</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">名称</th>
+<th style="text-align:left">大小</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">HEAD_CRC</td>
+<td style="text-align:left">2 bytes</td>
+<td style="text-align:left">CRC of total block or block part</td>
+</tr>
+<tr>
+<td style="text-align:left">HEAD_TYPE</td>
+<td style="text-align:left">1 byte</td>
+<td style="text-align:left">Block type</td>
+</tr>
+<tr>
+<td style="text-align:left">HEAD_FLAGS</td>
+<td style="text-align:left">2 bytes</td>
+<td style="text-align:left">Block flags</td>
+</tr>
+<tr>
+<td style="text-align:left">HEAD_SIZE</td>
+<td style="text-align:left">2 bytes</td>
+<td style="text-align:left">Block size</td>
+</tr>
+<tr>
+<td style="text-align:left">ADD_SIZE</td>
+<td style="text-align:left">4 bytes</td>
+<td style="text-align:left">Optional field – added block size</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>HEAD_TYPE 的值及对应的块类型</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">HEAD_TYPE</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>0x72</strong></td>
+<td style="text-align:left"><strong>marker block（标志快：起始）</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">0x73</td>
+<td style="text-align:left">archive header（归档头/主头：紧跟marker，描述文档属性）</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>0x74</strong></td>
+<td style="text-align:left"><strong>file header（普通文件条目）</strong></td>
+</tr>
+<tr>
+<td style="text-align:left">0x75</td>
+<td style="text-align:left">old style comment header</td>
+</tr>
+<tr>
+<td style="text-align:left">0x76</td>
+<td style="text-align:left">old style authenticity information</td>
+</tr>
+<tr>
+<td style="text-align:left">0x77</td>
+<td style="text-align:left">old style subblock</td>
+</tr>
+<tr>
+<td style="text-align:left">0x78</td>
+<td style="text-align:left">old style recovery record</td>
+</tr>
+<tr>
+<td style="text-align:left">0x79</td>
+<td style="text-align:left">old style authenticity information</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>0x7A</strong></td>
+<td style="text-align:left">**subblock（服务/附加信息块：存储压缩包的额外特性）【**如带恢复记录、带某些额外属性、或者用特定工具/特定选项打包出来的包】</td>
+</tr>
+<tr>
+<td style="text-align:left">0x7B</td>
+<td style="text-align:left">terminator（结束块）</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>常见的附加信息块</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>子类型标识</th>
+<th>英文名称</th>
+<th>含义/用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>STM</td>
+<td>Stream</td>
+<td>流信息/附加数据流相关的服务信息（常见于附加属性/附加流场景）</td>
+</tr>
+<tr>
+<td>CMT</td>
+<td>Comment</td>
+<td>注释/备注信息</td>
+</tr>
+<tr>
+<td>QO</td>
+<td>Quick Open（代码里常见为 <code>QOPEN</code>）</td>
+<td>快速打开/快速索引相关的数据</td>
+</tr>
+<tr>
+<td>ACL</td>
+<td>Access Control List</td>
+<td>Windows/NTFS 的权限 ACL 信息</td>
+</tr>
+<tr>
+<td>UOW</td>
+<td>Unix Owner</td>
+<td>Unix 的 owner/group 等所有者信息</td>
+</tr>
+<tr>
+<td>AV</td>
+<td>Authenticity Verification</td>
+<td>真实性校验/签名一类的附加信息（与 RAR “authenticity”相关）</td>
+</tr>
+<tr>
+<td>RR</td>
+<td>Recovery Record</td>
+<td>恢复记录/冗余校验数据（WinRAR 勾“添加恢复记录”会出现）</td>
+</tr>
+<tr>
+<td>EA2</td>
+<td>OS/2 Extended Attributes</td>
+<td>OS/2 扩展属性数据</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>用 010 Editor 打开<code>result.rar</code>发现有一块的 HEAD_TYPE 是<code>0x7a</code></li>
+</ul>
+<p><img src="image-20260128103728713.png" alt="image-20260128103728713" /></p>
+<ul>
+<li>这意味着这一块是一个STM的附加信息块（模板也匹配上了：value中显示）；因此尝试修改Block[1]的块头类型<code>0x7A → 0x74</code>强行作为普通文件块进行解读：获取那个STM文件看看是怎么回事。</li>
+</ul>
+<p><img src="image-20260128205932845.png" alt="image-20260128205932845" /></p>
+<ul>
+<li>用<code>file</code>看看发现是 PNG 文件，修改一下文件后缀，得到一个被截掉一半的二维码</li>
+</ul>
+<p><img src="image-20260128210338047.png" alt="image-20260128210338047" /></p>
+<ul>
+<li>修改高度即可获得完整二维码，扫码获得flag</li>
+</ul>
+<p><img src="3-Unpleasant_music.png" alt="3-Unpleasant_music.png" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;4dcfda814ec9fd4761c1139fee3f65eb&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="音频的调制与解码"><a class="markdownIt-Anchor" href="#音频的调制与解码"></a> 音频的调制与解码</h1>
+<h2 id="无线电固定码信息分析pt226x-pt224x"><a class="markdownIt-Anchor" href="#无线电固定码信息分析pt226x-pt224x"></a> 无线电固定码信息分析（PT226X / PT224X）</h2>
+<p><strong>题目特征：音频短，无声/电流声，重复的波形；可以看出长短波，但不是莫斯电码</strong></p>
+<p>参考博客：<a target="_blank" rel="noopener" href="https://cn1nja.github.io/posts/buumisc%E9%80%9A%E5%85%B35/#font-color0288d1hdctf2019%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90font">BUUMisc通关5 | N1key’s Blog</a></p>
+<blockquote>
+<ul>
+<li>PT226X / PT224X 这类编码（以及大量兼容款）主要用在<strong>低成本无线遥控</strong>场景：把地址（区分设备/遥控器）+ 按键功能（开/关/上/下/布防等）编码成一串脉冲码，通过 315/433MHz OOK/ASK 发射，接收端解码后执行动作</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>固定码遥控信号的构成</strong></p>
+<p><strong>钥匙信号(PT226X) = 同步引导码(4bit) + 地址位(8bit) + 数据位(4bit) + 停止码(1bit)</strong></p>
+<p><strong>钥匙信号(PT224X) = 同步引导码(8bit) + 地址位(20bit) + 数据位(4bit) + 停止码(1bit)</strong></p>
+</blockquote>
+<h3 id="pt226x"><a class="markdownIt-Anchor" href="#pt226x"></a> PT226X</h3>
+<p><img src="e2900941cf21f3b2db4ef3a5ffb4e163.png" alt="e2900941cf21f3b2db4ef3a5ffb4e163.png" /></p>
+<p><img src="97c5fcfbcb3c08a43b09e466dacd7135.png" alt="97c5fcfbcb3c08a43b09e466dacd7135.png" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">【两个波合起来算一位……感觉这个bit描述不太准，但是知道那个意思就行QWQ】</span><br><span class="line">译码简单记为：（实际波形就是 短波 → 0；长波 → 1；拼接后 00 表示 0，11 表示 1，01 表示 F）</span><br><span class="line"># 两长 → 1		两短 → 0</span><br><span class="line"># 先短后长 → F	   先长后短 → 无效码	</span><br></pre></td></tr></table></figure>
+<p>题目来源：<a target="_blank" rel="noopener" href="https://buuoj.cn/challenges#%5BHDCTF2019%5D%E4%BF%A1%E5%8F%B7%E5%88%86%E6%9E%90">[HDCTF2019]信号分析</a></p>
+<ul>
+<li>题目特征就是很多个相似的波形【这里波幅很小，需要先把鼠标放在坐标那里 <code>ctrl + 滚轮</code> 放大】；</li>
+</ul>
+<p><img src="image-20260227183239281.png" alt="image-20260227183239281" /></p>
+<ul>
+<li><strong>直接其中分析一个就行</strong></li>
+</ul>
+<p><img src="image-20260227191301644.png" alt="image-20260227191301644" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;FFFFFFFF0001&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="pt224x"><a class="markdownIt-Anchor" href="#pt224x"></a> PT224X</h3>
+<p><img src="f33cc570f0b5cdd58557eeb02b305986.png" alt="f33cc570f0b5cdd58557eeb02b305986.png" /></p>
+<p><img src="922a527354c2045f169592370a179bfa.png" alt="922a527354c2045f169592370a179bfa.png" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">【一个波就算是一位】</span><br><span class="line">译码就是短波为 0，长波为 1</span><br></pre></td></tr></table></figure>
+<p>一道经典 <code>PT2242</code> 题目<a target="_blank" rel="noopener" href="https://buuoj.cn/challenges#%5BSCTF2019%5D%E7%94%B5%E5%8D%95%E8%BD%A6">[SCTF2019]电单车</a></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">截获了一台电动车的钥匙发射出的锁车信号，3分钟之内，我要获得它地址位的全部信息。</span><br><span class="line">flag内容二进制表示即可。</span><br></pre></td></tr></table></figure>
+<p><img src="image-20260227182341122.png" alt="image-20260227182341122" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;01110100101010100110&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="afsk1200调制"><a class="markdownIt-Anchor" href="#afsk1200调制"></a> AFSK1200调制</h2>
+<p><strong>题目特征：哔哔/尖锐调制音，频谱图在1200Hz与2200Hz附近出现峰值；与下面的WEFAX峰值不同</strong></p>
+<p>题目来源：攻防世界-latlong</p>
+<p>参考博客：<a target="_blank" rel="noopener" href="https://www.sanjiuctf.cn/?p=1409">sanjiuMISC师傅的博客（带有附件的）</a>（这里所有附件在百度网盘里进行了备份）</p>
+<blockquote>
+<p>一种<strong>无线电音频调制信号</strong>，常见于业余无线电的数据通信里（尤其是 APRS/Packet Radio）</p>
+<ul>
+<li>
+<p><em>Audio Frequency Shift Keying</em>（音频频移键控）<br />
+用<strong>两种不同的音频频率</strong>来表示比特 0/1（或mark/space）。</p>
+</li>
+<li>
+<p><strong>1200</strong> 指速率：通常是 <strong>1200 baud</strong>（每秒 1200 个符号，常被口语化叫1200bps）。</p>
+</li>
+<li>
+<p><strong>BFSK = Binary Frequency Shift Keying（二进制频移键控）</strong><br />
+意思是：用<strong>两种不同的频率</strong>分别表示比特 <strong>0</strong> 和 <strong>1</strong>。</p>
+<ul>
+<li>BFSK 是 <strong>FSK 的一个特例</strong>（只用两频 → 二进制）</li>
+<li>FSK更泛（可以 M-FSK，用多于两种频率）</li>
+</ul>
+</li>
+<li>
+<h3 id="afsk-和-bfsk-的关系"><a class="markdownIt-Anchor" href="#afsk-和-bfsk-的关系"></a> AFSK 和 BFSK 的关系</h3>
+<ul>
+<li><strong>BFSK</strong>：描述调制方式本质——两个频率代表 0/1（通常是射频载波在两个频点之间跳）</li>
+<li><strong>AFSK</strong>：描述实现方式——先在<strong>音频域</strong>做 BFSK（两条音调），再用 FM 发射出去<br />
+也就是：<strong>AFSK = 用音频来实现的 BFSK（常见两音调）</strong></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>最经典的 AFSK1200 组合是 <strong>Bell 202</strong> 这套：</p>
+<ul>
+<li><strong>1200 Hz</strong>（mark）和 <strong>2200 Hz</strong>（space）两种音调来回切换。<br />
+它会作为“音频”送进 FM 电台发射，所以录下来听会像哔哔/尖锐调制音。</li>
+</ul>
+<p>在业余无线电里，AFSK1200 最常承载：</p>
+<ul>
+<li><strong>AX.25 packet</strong>（类似 HDLC 帧结构）：业余无线电用的数据包/链路层协议，规定一帧里怎么写呼号地址、路径和校验。</li>
+<li><strong>APRS</strong>（位置、短消息、状态等，跑在 AX.25 上面）：跑在 AX.25 里的应用内容，用来发位置、短消息、状态、气象/遥测等信息。</li>
+</ul>
+<hr />
+<ul>
+<li>全选音频后在分析中绘制频谱图</li>
+</ul>
+<p><img src="image-20260129225603592.png" alt="image-20260129225603592" /></p>
+<blockquote>
+<p>这个频谱图展示的是<strong>各个频率成分有多强</strong>。</p>
+<ul>
+<li><strong>横轴（Hz）</strong>：频率。越往右频率越高。</li>
+<li><strong>纵轴（dB）</strong>：强度/能量（相对值）。越靠上表示该频率成分越强。</li>
+<li><strong>紫色形状</strong>：该段音频在不同频率上的能量分布（FFT 结果）。</li>
+</ul>
+</blockquote>
+<p><img src="image-20260130090402175.png" alt="image-20260130090402175" /></p>
+<ul>
+<li>
+<p>这里可以看出来这段音频的两个峰出现在 <strong>1118/2228</strong>（靠近经典的约 <strong>1200 Hz</strong> 和 <strong>2200 Hz</strong>），通常就对应“0/1”用的两种音调：正是经典的 <strong>AFSK</strong>调制方式</p>
+</li>
+<li>
+<p>那么下一步就是针对AFSK的解调了</p>
+</li>
+</ul>
+<p>（1）首先是使用sox把wav转换成raw：把 <code>data</code> chunk 里的采样数据单独剥离出来，输出成裸字节流，方便后续程序直接按样本读。【WAV 是 <strong>RIFF 容器</strong>，前面有一堆头部（<code>RIFF/fmt/data</code> 等）；很多解析工具只接受<strong>纯 PCM 样本流</strong>（raw），而不会去解析这些头部】</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sox -t wav latlong.wav -esigned-integer -b16 -r 22050 -t raw latlong.raw</span><br><span class="line"></span><br><span class="line"><span class="comment"># sox: 调用 SoX 音频处理工具</span></span><br><span class="line"><span class="comment"># -t wav: 指定输入文件的类型为 WAV 格式</span></span><br><span class="line"><span class="comment"># latlong.wav: 输入文件名</span></span><br><span class="line"><span class="comment"># -esigned-integer: 指定输出音频的编码格式为有符号整数</span></span><br><span class="line"><span class="comment"># -b16: 指定输出音频的位深为 16 位（即每个样本占 16 位）</span></span><br><span class="line"><span class="comment"># -r 22050: 指定输出音频的采样率为 22050 Hz</span></span><br><span class="line"><span class="comment"># -t raw: 指定输出文件的类型为 RAW（原始音频数据，无文件头）</span></span><br><span class="line"><span class="comment"># latlong.raw: 输出文件名</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># sox 默认输出一般是小端；但更严谨会显式写：</span></span><br><span class="line"><span class="comment">#	-c 1（单声道）</span></span><br><span class="line"><span class="comment">#	-L（little-endian）</span></span><br></pre></td></tr></table></figure>
+<p><strong>【这里指定输出文件的编码格式、位深、采样率是因为后面解调的时候使用的工具multimon-ng对输入是这样要求的】</strong></p>
+<p><img src="image-20260130093648234.png" alt="image-20260130093648234" /></p>
+<p>这一步是在把 WAV 里的 PCM 采样“剥壳”成解调器可直接读取的 raw 样本流，并且（通过 <code>-r 22050</code>）把采样率统一到解调器更好处理的值。</p>
+<p>（2）然后就是使用工具 <code>multimon-ng</code> 解密</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">multimon-ng -t raw -a AFSK1200 latlong.raw</span><br><span class="line"></span><br><span class="line"><span class="comment"># -t 指定输入文件的类型</span></span><br><span class="line"><span class="comment"># -a 指定要使用的解码协议</span></span><br><span class="line"><span class="comment"># AFSK1200 表示解码 1200 bps 的音频频移键控（Audio Frequency-Shift Keying） 信号，这是 APRS（自动分组报告系统）等协议常用的调制方式</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>用 <code>-t raw</code> 时，multimon-ng 默认把输入当成它的原生 raw 格式来读</strong>，也就是：</p>
+<ul>
+<li><strong>采样率：22050 Hz</strong></li>
+<li><strong>采样格式：16-bit signed little-endian（S16LE）</strong></li>
+<li><strong>单声道（mono）</strong></li>
+</ul>
+<p>【这也是前面提取raw文件指定相关参数的原因】</p>
+</blockquote>
+<p><img src="image-20260130093913703.png" alt="image-20260130093913703" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;f4ils4f3c0mms&#125;</span><br></pre></td></tr></table></figure>
+<p>【AFSK → 解出来 AX.25 帧 → 里面的 APRS 文本里包含位置字段】</p>
+<h2 id="sstv解码"><a class="markdownIt-Anchor" href="#sstv解码"></a> SSTV解码</h2>
+<p>题目来源：<a target="_blank" rel="noopener" href="https://adworld.xctf.org.cn/challenges/list">江苏工匠杯-来自银河的信号</a></p>
+<p><strong>题目特征：声音很奇怪，能听到呲呲啦啦的声音（相对于下面的WEFAX有很明显的“开头同步音/导频”，整段音频的频率变化更像“画画”，模式不同节奏不同）</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SSTV 是一种很“老派但很酷”的玩法：把一张图片编码成音频（听起来像怪叫/调制音），通过无线电或音频链路发出去；接收端把这段音频再解码回图片。</span><br><span class="line">简单来说就是：把“音频 ↔ 图片”互相转换（按 SSTV 协议/模式，如 Robot36/Scottie/Martin 等）</span><br></pre></td></tr></table></figure>
+<p>使用Audacity打开是这样的波形（波形很均匀，听起来声音很奇怪）</p>
+<p><img src="image-20260127083731571.png" alt="image-20260127083731571" /></p>
+<p>放大后是明显的正弦波</p>
+<p><img src="image-20260127083810912.png" alt="image-20260127083810912" /></p>
+<p>操作的话直接用慢扫描电视把题目附件作为接收到的SSTV音频进行解码（RX）为图片即可【当然这个应用还有编码/发送的功能（TX）】</p>
+<p>（这里两个都是应该直接外放题目然后就能解码的；但是由于外放会导致出现噪声；因此我还<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_62555697/article/details/149911157">安装了虚拟声卡</a>)</p>
+<h3 id="mmsstv"><a class="markdownIt-Anchor" href="#mmsstv"></a> MMSSTV</h3>
+<p>选择为解码模式</p>
+<p><img src="image-20260127091016380.png" alt="image-20260127091016380" /></p>
+<p><strong>直接外放声音</strong>（有噪声导致瑕疵）【这里可以考到本来RX Mode是Auto，自动选择为Scottie DX了】：</p>
+<p><img src="image-20260127090822880.png" alt="image-20260127090822880" /></p>
+<p>【这里可以看到解码图片的时候出现了偏移（左侧蓝色），可以通过点击ReSync校准按钮进行校准】</p>
+<ul>
+<li>MMSSTV配置虚拟声卡避免外放噪声【<strong>这里的设置与win+R → mmsys.cpl里面设置效果是一样的</strong>】
+<ul>
+<li>为了防止偏移，输入输出的虚拟声卡同一设置为44.1kHz（这里只截了一张图）</li>
+<li><img src="image-20260127104038741.png" alt="image-20260127104038741" /></li>
+<li>打开软件，点击菜单Option，选择&quot;Soundcard Input level&quot;。</li>
+<li><img src="image-20260127102158676.png" alt="image-20260127102158676" /></li>
+<li>先点击播放，选择VB CABLE的虚拟声卡，后设为默认值，点击确定。</li>
+<li>
+<img src="image-20260127103237891.png" alt="image-20260127103237891" style="zoom:67%;" />
+</li>
+<li>
+<img src="image-20260127103412012.png" alt="image-20260127103412012" style="zoom:67%;" />
+</li>
+<li>【<strong>注意：这回导致其他应用也用虚拟声卡作为默认；所以用完SSTV后记得调回原来的默认</strong>】</li>
+</ul>
+</li>
+</ul>
+<p><strong>虚拟声卡本地回环+实时校正</strong>获得译码图片（比较清晰了）</p>
+<p><img src="image-20260127104602822.png" alt="image-20260127104602822" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f7liavga&#123;1M_0105n_cC@okmei_nFge!s&#125;</span><br><span class="line">→→→→→→栅栏密码</span><br><span class="line">flag&#123;M00nc@ke_Fes7iva1_15_Coming!&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="rx-sstv"><a class="markdownIt-Anchor" href="#rx-sstv"></a> RX-SSTV</h3>
+<p>（这里只展示一下使用虚拟声卡获得的绘图，设置于前面的MMSSTV设置一样）</p>
+<ul>
+<li>
+<p>只不过应用里快捷打开设置是在这里</p>
+</li>
+<li>
+<p><img src="image-20260127105230727.png" alt="image-20260127105230727" /></p>
+</li>
+<li>
+<p>而且RX-SSTV支持直接在软件里打开音频附件；不用像MMSSTV那样再单独播放了（实则打开后没啥区别）</p>
+</li>
+<li>
+<p><strong>撕裂/错行/跳行</strong> → 先点 <strong>ReSync</strong></p>
+<p><strong>整体斜、从上到下越来越偏</strong> → 用 <strong>Slant</strong> 调直</p>
+</li>
+</ul>
+<p><img src="image-20260127113258951.png" alt="image-20260127113258951" /></p>
+<p>【实操的时候也是几秒点一下ReSync防止偏移（还是花的话可以调一下Input/Output的音量试一试30%~60%）】</p>
+<h2 id="wefax解码ffmpegfldigi"><a class="markdownIt-Anchor" href="#wefax解码ffmpegfldigi"></a> WEFAX解码(ffmpeg&amp;fldigi)</h2>
+<p><strong>题目特征：声音也很奇怪；但是相对于上面的SSTV听起来更像“持续的噪声 + 稳定音调”，瀑布图常见两条稳定能量线（1500/2300Hz一带）</strong></p>
+<p><img src="image-20260131162238418.png" alt="image-20260131162238418" /></p>
+<p><img src="image-20260131160517697.png" alt="image-20260131160517697" /></p>
+<p>题目来源：攻防世界（Olympic CTF 2014）-Make-similar</p>
+<p>题目提示：120 LPM</p>
+<p>参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_75023818/article/details/136744629">攻防世界-misc-Make-similar_攻防世界make-similar-CSDN博客</a></p>
+<ul>
+<li>首先收到的附件是一个OGG文件</li>
+</ul>
+<blockquote>
+<p>OGG（常写作 .ogg）是一种开源的多媒体<strong>封装容器</strong>格式，用来把音频（也可包含视频/字幕等）按时间戳打包在一起；它本身不等于某种具体编码，最常见承载的是 <strong>Vorbis</strong>（有损压缩，早期很常用）和 <strong>Opus</strong>（更新、更高效，语音/音乐都很强）这类音频编码。OGG 采用“页面/包”式结构组织数据，便于流式传输和纠错，因此在游戏、开源软件和网络音频场景里很常见。OGG把编码器产生的包（packet）切块装进页（page）里，再按顺序串起来。文件里最基本的重复单元是 <strong>Ogg Page</strong>，每一页开头都有固定标识 <strong><code>OggS</code></strong>（4 字节魔数），后面跟着页头和数据</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">┌──(npusec㉿AnRan)-[/mnt/e/wkplace/MP3/Make-similar]</span><br><span class="line">└─$ ffprobe -hide_banner Make-similar.ogg</span><br><span class="line">Input <span class="comment">#0, ogg, from &#x27;Make-similar.ogg&#x27;:</span></span><br><span class="line">  Duration: 01:24:33.14, start: 172254.400726, bitrate: 25 kb/s</span><br><span class="line">  Stream <span class="comment">#0:0: Audio: vorbis, 22050 Hz, mono, fltp, 24 kb/s, start 172254.400726</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><strong>ffprobe输出分析</strong></p>
+<ul>
+<li>
+<p><strong>Duration: 01:24:33.14</strong><br />
+文件里音频的时长：1 小时 24 分 33.14 秒。</p>
+</li>
+<li>
+<p><strong>bitrate: 25 kb/s</strong><br />
+容器层面的平均码率（大致值）。下面流里也会有更精确的流码率。</p>
+</li>
+<li>
+<p><strong>Stream #0:0: Audio: vorbis</strong><br />
+第 0 个输入（#0）里的第 0 条流（:0），类型是音频，编码是 <strong>Vorbis</strong>（OGG 常见音频编码）。</p>
+</li>
+<li>
+<p><strong>22050 Hz, mono</strong><br />
+采样率 <strong>22050 Hz</strong>，<strong>单声道</strong>。</p>
+</li>
+<li>
+<p><strong>fltp</strong><br />
+解码后在 FFmpeg 内部使用的采样格式：<strong>float planar</strong>（浮点、平面布局）。这不是“文件存的格式”，更像是 ffmpeg 解码出来后怎么表示音频样本。</p>
+</li>
+<li>
+<p><strong>24 kb/s</strong><br />
+这条音频流的码率（通常比上面的容器平均码率更贴近真实）。</p>
+</li>
+<li>
+<p><strong>start: 172254.400726 / start 172254.400726</strong><br />
+重点在这：表示这条音频流的<strong>起始时间戳（PTS）不是从 0 开始</strong>，而是从 <strong>172254.400726 秒</strong>开始计时。<br />
+172254 秒大约是 <strong>47 小时 50 分 54 秒</strong>，也就是说：这段音频虽然只有 1:24:33，但它的时间戳被“整体平移”到了一个很靠后的时间轴位置。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>然后题目提示的120 LPM是<strong>WEFAX解码</strong>中常见的一个参数</p>
+<blockquote>
+<p>WEFAX（Weather FAX）/ Radiofax是“<strong>无线电传真</strong>”的一种：把一张黑白（有时带灰度）的图片——常见是<strong>气象图、等压线图、海况图、航海预报</strong>——用音频信号的方式在短波等无线电频段里发出来，接收端把音频解码后再还原成图像。</p>
+</blockquote>
+<p>它的工作方式很像老式传真机：图片是<strong>一行一行扫描发送</strong>的，所以在解码软件里会看到参数像：</p>
+<ul>
+<li>
+<p><strong>LPM（Lines Per Minute）</strong>：每分钟扫多少行，决定“图像纵向速度/比例”，常见值 <strong>120 LPM</strong>。</p>
+</li>
+<li>
+<p><strong>IOC</strong>：决定每行的“宽度/分辨率标准”（常见 576 或 288）。</p>
+</li>
+<li>
+<p><strong>中心音频频率/shift</strong>：WEFAX 通常用固定的音频中心（常见 1900 Hz）和频移（常见 800 Hz）来表示黑/白/灰度。</p>
+</li>
+<li>
+<p>LPM的值一般与IOC的模式是绑定的，在fldigi中可以通过<code>Configure → Config Dialog → Modem → Wefax</code>中查看或调整不同IOC模式下的LPM值</p>
+<p><img src="image-20260131161339990.png" alt="image-20260131161339990" /></p>
+</li>
+<li>
+<p>工作模式则可以直接通过 Op_Mode选择WEAFAX-IOC576（其他的模式都是各类文本/数字电报码/弱信号通信模式）</p>
+<p><img src="image-20260131161537896.png" alt="image-20260131161537896" /></p>
+</li>
+</ul>
+</li>
+<li>
+<p>有关工具的具体介绍在后面的做题过程中会详细说一下</p>
+</li>
+</ul>
+<hr />
+<ul>
+<li>
+<p>题目提示的120 LPM，指的是<a target="_blank" rel="noopener" href="http://en.wikipedia.org/wiki/Radiofax">天气传真</a>（WEFAX/Radiofax），一种传输单色图像的模拟模式。</p>
+</li>
+<li>
+<p>由于解码工具要求输入格式需要时wav文件，因此需要将ogg格式文件转换成wav格式音频</p>
+</li>
+</ul>
+<p>（1）这里可以直接用Audacity进行转换</p>
+<p>​	文件→导出音频→本地导出音频</p>
+<p>​	<img src="image-20260131110557523.png" alt="image-20260131110557523" style="zoom:67%;" /></p>
+<p>（2）也可以用ffmpeg工具</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ffmpeg -i Make-similar.ogg -ac 1 -ar 22050 -c:a pcm_s16le FF_Make-similar.wav</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p><code>-ac 1</code>：<strong>audio channels = 1</strong>，把音频变成<strong>单声道</strong>。<br />
+目的：很多传真/解码工具更喜欢单声道；即便原来是立体声，也会被混成 1 声道。</p>
+</li>
+<li>
+<p><code>-ar 22050</code>：<strong>audio sample rate = 22050 Hz</strong>，设置输出采样率为 22050。<br />
+目的：保持和原文件一致（之前 ffprobe 看到是 22050 Hz），避免不必要的重采样误差。</p>
+</li>
+<li>
+<p><code>-c:a pcm_s16le</code>：指定音频编码器为 <strong>PCM signed 16-bit little-endian</strong>。<br />
+解释：这是 WAV 里最常见的无压缩格式（16 位整数，小端）。<br />
+目的：兼容性最强；很多老工具不爱吃浮点 PCM 或压缩编码。</p>
+</li>
+</ul>
+<p><img src="image-20260131173400720.png" alt="image-20260131173400720" /></p>
+<ul>
+<li>然后用<strong>fldigi</strong>（<a target="_blank" rel="noopener" href="http://www.blackcatsystems.com/software/multimode/fax.html#HOWREC">Multimode</a>的免费版平替软件）转换成单色传真图像：</li>
+</ul>
+<p>（1）选择工作模式为120LPM的天气传真模式</p>
+<p><img src="image-20260131170525872.png" alt="image-20260131170525872" /></p>
+<p>（2）配置声卡（这里我选择了同SSTV中的都是虚拟声卡，防止耳机听到）<code>Configure → Config Dialog → Soundcard → Devices</code></p>
+<p><img src="image-20260131170837349.png" alt="image-20260131170837349" /></p>
+<p>（3）在File中打开音频wav文件作为输入，选择playback</p>
+<p><img src="image-20260131170922017.png" alt="image-20260131170922017" /></p>
+<p>（4）在打开文件后会自动开始播放，然后要根据解码结果进行微调：主要是Tilt与Align</p>
+<p><img src="image-20260131171401485.png" alt="image-20260131171401485" /></p>
+<ul>
+<li>
+<p>说明一下其他的几个参数</p>
+<ul>
+<li>
+<p><strong>AFC = Automatic Frequency Control（自动频率控制）</strong>：自动跟踪信号的最佳中心频率，让解码窗口始终对准信号（如底部显示的 1900Hz 附近）。不太适合：<strong>播放文件</strong>（频率本来就固定），AFC 可能会追着噪声/瞬时能量跑，导致中心频率抖，从而影响同步。</p>
+</li>
+<li>
+<p><strong>SQL = Squelch（静噪/静音门限）</strong>：只有当信号强度/信噪比超过某个门限时，才放行给解码器；否则当作没信号（避免纯噪声时乱解码）。<strong>建议（文件解 WEFAX）</strong>：先 <strong>关 SQL</strong>（或把门限调得很低），保证整段音频都进解码器</p>
+</li>
+<li>
+<p>没动过的三个参数</p>
+</li>
+<li>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+<th>效果</th>
+<th>使用时机</th>
+<th>常见副作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Auto</strong></td>
+<td>自动电平/自动对比度（自动阈值），让黑白范围自动拉开</td>
+<td><strong>开</strong>：画面通常更“有对比”、更容易直接看清；亮度会自动跟随信号变化</td>
+<td>录音电平忽大忽小、刚开始想快速出可读图时</td>
+<td>可能“忽明忽暗”、某些区域对比度跳动、灰度不稳定</td>
+</tr>
+<tr>
+<td><strong>Noise</strong></td>
+<td>降噪/平滑（去掉噪点、毛刺）</td>
+<td><strong>开</strong>：背景更干净、噪点变少、线条更顺滑</td>
+<td>底噪大、压缩失真明显、画面满是颗粒点时</td>
+<td>细节会被抹掉一点：小字变糊、细线变粗</td>
+</tr>
+<tr>
+<td><strong>Bin（数值）</strong></td>
+<td>亮度量化/二值化力度（影响灰度层次与黑白“硬度”）</td>
+<td><strong>数值更小</strong>：更“硬黑白”、字更黑更冲；<strong>数值更大</strong>：灰度更细腻、过渡更平滑</td>
+<td>想看小字/flag：把 Bin 调小一点（如 64~96）；想看地图/灰度细节：保持 128 或略大</td>
+<td>Bin 太小：灰度细节丢、背景易脏；Bin 太大：文字偏灰、对比不够</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+</li>
+<li>
+<p>fldigi解析出来的图片默认保存路径：C:\Users\AnRan\fldigi.files\images</p>
+</li>
+<li>
+<p>fldigi内部播放文件看不到进度条，想要调进度只能使用别的软件播放然后换声卡（类似SSTV那样）</p>
+</li>
+</ul>
+<p>（5）等待……这个音频很长，但是实际上有用的内容会循环出现，就是下面解析出来的这一段图片文字</p>
+<p><img src="wefax_20260131_172925_14070000_gui.png" alt="wefaximage" /></p>
+<p>提取文本也就是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">section 1 of 1 of file rfax_man</span><br><span class="line">begin 644 rfax_man</span><br><span class="line">h5sg60BSxwp62+57aMLVTPK3i9b-t+5pGLKyPA-FxxuysvFs+BT8+o0dVsM24</span><br><span class="line">hcZHRaWYEHRBGFGtqk-cMV7oqqQRzbobGRB9Kwc-pTHzCDSSMJorR8d-pxdqd</span><br><span class="line">hLWpvQWRv-N33mFwEicqz+UFkDYsbDvrfOC7tko5g1JrrSX0swhn64neLsohr</span><br><span class="line">h26K1mSxnS+TF1Cta8GHHQ-t1Cfp7nh-oZeFuVi5MEynqyzX8kMtXcAynSLQx</span><br><span class="line">hg4o56Pu4YUZHMqDGtczKeCwXU8PZEc4lY0FbDfFfgZpJFC-a-sHGLtGJgCMZ</span><br><span class="line">hksr6XNTedEUdVJqxOO5VaReoH68eEPJ2m6d9mKhlhVE7zw4Yru4DUWRCJH28</span><br><span class="line">hyeth+l2I0gPnEfrTLwAc+-TPS0YKYY3K0np58gVPgdAN8RY7+rQfRDin9JSa</span><br><span class="line">hPG32WG7-rTl3uthvrnDO-wD09GDIRCniuoefs8UsfiWZOLq+0awOrQxAPM+C</span><br><span class="line">hxLwOJ9VUKwdn7dJduLn1KhBucvL1pr5lGiBFfUbL79cFFex+G27kT+fsQ7X5</span><br><span class="line">h87mgPivWhDSQHKPXqpKGniDkYsIYpg66ZWbHp4PfcgtPukElDWENlQPSuNAQ</span><br><span class="line">hnboE4Bd8kyyokt67GgfGvBVS45sMFPtlgKRlG-QPFSgbMHujA3qYemxnuqGx</span><br><span class="line">hp97aXpdKpvAE8zx-oUzazoVFz32X3OxAuiWJhKEjaYKpM7f95yv1S62v+k++</span><br><span class="line">+</span><br><span class="line">end</span><br><span class="line">sum —r/size 7468/769 section (from &quot;begin&quot; to &quot;end&quot;)</span><br><span class="line">sum —r/size 36513/540 entire input file</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这种每行均以小写h开头的密文很类似xxencode，这里配置了本地的xxencode解码（具体编码介绍在工具路径下）。<a href="D:%5CMiscTools%5CDecoder%5CXXencode%5Cxxencode.html">本地解码</a>&amp;&amp;<a target="_blank" rel="noopener" href="https://www.webutils.pl/XXencode">线上网站</a>。解码就会获得一个rfax_man文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">┌──(npusec㉿AnRan)-[/mnt/e/wkplace/MP3/Make-similar]</span><br><span class="line">└─$ file rfax_man</span><br><span class="line">rfax_man: gzip compressed data, was <span class="string">&quot;rfax_man.py&quot;</span>, last modified: Thu Feb  6 16:52:39 2014, max speed, from FAT filesystem (MS-DOS, OS/2, NT), original size modulo 2^32 827</span><br></pre></td></tr></table></figure>
+<ul>
+<li>gzip压缩包，解压rfax_man.gz得到rfax_man.py文件</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket,os,sys,hashlib</span><br><span class="line"></span><br><span class="line">KEY  = <span class="string">&quot;CTF&#123;4BDF4498E4922B88642D4915C528DA8F&#125;&quot;</span> <span class="comment"># DO NOT SHARE THIS!</span></span><br><span class="line">HOST = <span class="string">&#x27;109.233.61.11&#x27;</span></span><br><span class="line"><span class="comment"># ···后略</span></span><br><span class="line"><span class="comment"># 然后这个KEY就是flag了</span></span><br></pre></td></tr></table></figure>
+<h1 id="音频中的隐写"><a class="markdownIt-Anchor" href="#音频中的隐写"></a> 音频中的隐写</h1>
+<h2 id="mp3stego"><a class="markdownIt-Anchor" href="#mp3stego"></a> MP3Stego</h2>
+<p><img src="image-20260126195632187.png" alt="image-20260126195632187" /></p>
+<p><strong>题目特征：mp3文件，但是有相关的密码的提示（长得像是密码的字符串）</strong></p>
+<p>这里题目描述直接给出了密码字符串 — syclovergeek</p>
+<p>直接用工具</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Decode.exe -X -P syclovergeek xuan_zhuan_tiao_yue.mp3</span><br></pre></td></tr></table></figure>
+<p><img src="image-20260126200855541.png" alt="image-20260126200855541" /></p>
+<p>自动在mp3文件所在的路径解码出结果</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xuan_zhuan_tiao_yue.mp3.txt</span><br><span class="line">SYC&#123;Mp3_B15b1uBiu_W0W&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="stegolsb"><a class="markdownIt-Anchor" href="#stegolsb"></a> Stegolsb</h2>
+<p>题目来源：<a target="_blank" rel="noopener" href="https://ctf.bugku.com/challenges/detail/id/2371.html">n00bzCTF2023-LSB</a></p>
+<p><strong>题目特征：wav文件可能出现LSB隐写</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">WAV与MP3文件对比</span><br><span class="line">WAV：像保存原始照片 RAW（信息全、体积大、后期方便）。</span><br><span class="line">MP3：像保存压缩过的 JPEG（体积小、看着差不多，但细节丢了，反复压会糊）。</span><br><span class="line"></span><br><span class="line">WAV/PCM 更适合做传统音频隐写（LSB、相位、回声等），因为数据是直接的采样点。</span><br><span class="line">MP3 隐写（如 MP3Stego）通常得在编码结构里做文章（比特分配/量化/哈夫曼等），因为 MP3 里根本不是直接的采样序列。</span><br></pre></td></tr></table></figure>
+<p>【这个工具就是一个python的包，我直接装到web虚拟环境中了】</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># (web) PS E:\wkplace\MP3\lsb&gt;</span></span><br><span class="line">stegolsb wavsteg -r -i .\chall.wav -o flag.txt -b 100</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>stegolsb</code>：工具主命令（Python 包安装后提供的 CLI）。</li>
+<li><code>wavsteg</code>：处理 <strong>WAV 音频</strong> 的 LSB 隐写/提取模块。</li>
+<li><code>-r</code>：<code>recover</code> / <code>read</code>（提取模式）。<br />
+含义：不是往 WAV 里藏数据，而是<strong>从 WAV 里恢复隐藏内容</strong>。</li>
+<li><code>-i .\chall.wav</code>：输入文件（input）。<br />
+<code>.\</code> 表示当前目录下的 <code>chall.wav</code>。</li>
+<li><code>-o flag.txt</code>：输出文件（output）。<br />
+提取到的数据会写入 <code>flag.txt</code>。注意：虽然叫 <code>.txt</code>，但输出<strong>可能是二进制</strong>，只是你给它取了这个后缀。</li>
+<li><code>-b 100</code>：提取 <strong>100 字节</strong>（bytes）。<br />
+工具会按顺序从音频采样的 LSB 中拼比特，凑够 100 字节就停止并写入输出文件。</li>
+</ul>
+<p>补充：这条命令里没有显式指定 <code>-n</code>（使用多少个 LSB 位），那就用工具的默认值（不同版本默认可能是 1 或 2）。如果提取结果像乱码，最常见的就是需要试 <code>-n 1..8</code> 或者调整 <code>-b</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 补充：也可用stegolsb进行图片的lsb隐写提取；但是只有rgb顺序，无α位</span></span><br><span class="line">stegolsb steglsb -r -i .\steg.png -o out.bin -n 2</span><br></pre></td></tr></table></figure>
+<h2 id="deegger-embedder"><a class="markdownIt-Anchor" href="#deegger-embedder"></a> DeEgger Embedder</h2>
+<p><strong>题目特征：且会比正常文件大很多，模板外冗杂内容（音频文件）；观察二进制文件里面可能找到DeEgger文本字样（图片）；</strong></p>
+<p>题目来源：攻防世界-CISCN[pyHAHA]</p>
+<p>相似的题目（没找到题附件）：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_64489501/article/details/127956432">巨人的秘密</a></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44604541/article/details/112468128">攻防世界 Misc高手进阶区 6分题 pyHAHA-CSDN博客</a></p>
+<hr />
+<p>（前面是pyc的文件修复部分）</p>
+<ul>
+<li>一进去就看到了两个倒着的flag，而且明明是pyc后缀的文件但是用模板解析失败了。</li>
+</ul>
+<p><img src="image-20260130163305749.png" alt="image-20260130163305749" /></p>
+<ul>
+<li>由于pyc结构就是**[固定长度的文件头 header（因版本而异）] + [marshal 序列化后的 code object 数据]**，没有固定的文件尾；这里先试着反序文件。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="built_in">open</span>(<span class="string">&#x27;rePyHaHa.pyc&#x27;</span>,<span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;PyHaHa.pyc&#x27;</span>,<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> g:</span><br><span class="line">	f.write(g.read()[::-<span class="number">1</span>])</span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+<ul>
+<li>
+<p>但是模板依然只解析出来了后面的file部分，应该是缺少文件头了；这里需要根据特定的解释版本python补上不同的pyc文件头**（一般也就是四字节的magic number）**</p>
+</li>
+<li>
+<p>顺便补充一下pyc文件的文件格式：</p>
+</li>
+</ul>
+<p><strong>（1）python3.7+</strong></p>
+<p><strong>头固定 16 字节</strong>（小端序 little-endian）：</p>
+<table>
+<thead>
+<tr>
+<th>偏移</th>
+<th>长度</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>4</td>
+<td><strong>magic number</strong>（版本标识）</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>4</td>
+<td><strong>bitfield / flags</strong></td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>8</td>
+<td><strong>(分两种格式)</strong>：要么是 <code>timestamp+size</code>，要么是 <code>hash</code></td>
+</tr>
+</tbody>
+</table>
+<p>​	<code>flags</code> 决定 0x08 开始的 8 字节是哪种：</p>
+<ul>
+<li><strong>时间戳型（timestamp-based）</strong>（最常见）
+<ul>
+<li>0x08…0x0B：<code>mtime</code>（源码最后修改时间，Unix 时间戳，uint32）</li>
+<li>0x0C…0x0F：<code>source_size</code>（源码文件大小，uint32）</li>
+</ul>
+</li>
+<li><strong>哈希型（hash-based，PEP 552）</strong>
+<ul>
+<li>0x08…0x0F：<code>source_hash</code>（8 字节哈希）</li>
+<li><code>flags</code> 里低位会标识“这是 hash-based”，另一个位通常表示是否 <strong>check_source</strong>（是否强制校验源码）。</li>
+</ul>
+</li>
+</ul>
+<p><strong>（2）python3.3~3.6</strong></p>
+<p><strong>头一般是 12 字节</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>偏移</th>
+<th>长度</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>4</td>
+<td>magic number</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>4</td>
+<td>mtime（时间戳）</td>
+</tr>
+<tr>
+<td>0x08</td>
+<td>4</td>
+<td>source_size（源码大小）</td>
+</tr>
+</tbody>
+</table>
+<p><strong>（3）python2.x</strong></p>
+<p><strong>头一般是 8 字节</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>偏移</th>
+<th>长度</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x00</td>
+<td>4</td>
+<td>magic number</td>
+</tr>
+<tr>
+<td>0x04</td>
+<td>4</td>
+<td>mtime（时间戳）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>常见的不同版本的magic值（加黑的是验证过的）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>常见度</th>
+<th>Python 版本</th>
+<th><code>.pyc</code> 头长度</th>
+<th>常见 magic（文件开头 4 字节 hex）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>很常见</td>
+<td><strong>2.7</strong></td>
+<td>8B</td>
+<td>****</td>
+</tr>
+<tr>
+<td>常见</td>
+<td><strong>3.8 / 3.9 / 3.10 / 3.11</strong></td>
+<td>16B</td>
+<td>3.8: 55 0D 0D 0A / 3.9: <strong>61 0D 0D 0A</strong> / 3.10: <strong>6F 0D 0D 0A</strong> / 3.11: <strong>A7 0D 0D 0A</strong></td>
+</tr>
+<tr>
+<td>也常见</td>
+<td><strong>3.7</strong></td>
+<td>16B</td>
+<td>42 0D 0D 0A</td>
+</tr>
+<tr>
+<td>偶尔</td>
+<td><strong>3.6</strong></td>
+<td>12B</td>
+<td><strong>33 0D 0D 0A</strong></td>
+</tr>
+</tbody>
+</table>
+<p>也可以直接使用对应版本的python的虚拟环境，然后代码查看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python3.x查看magic代码</span></span><br><span class="line">python -c <span class="string">&quot;import importlib.util,binascii;print(binascii.hexlify(importlib.util.MAGIC_NUMBER).decode())&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># python2.x查看magic代码（因为2.x版本没有util）</span></span><br><span class="line">python -c <span class="string">&quot;import imp, binascii;print(binascii.hexlify(imp.get_magic()))&quot;</span></span><br></pre></td></tr></table></figure>
+<p><strong>【标准 CPython 的 <code>.pyc</code> magic 的后两字节应当是固定的 <code>0D 0A</code>；如果十六进制不对的话就要考虑是不是文件头缺失需要先修补文件了（当然magic在的话直接file就显示是什么文件而不是显示data了）】</strong></p>
+<p>关于magic的这一篇博客说的比较好：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Zheng__Huang/article/details/112380221">Python Uncompyle6 反编译工具使用 与 Magic Number 详解-CSDN博客</a></p>
+<ul>
+<li>
+<p>总结：</p>
+<ul>
+<li>在Python3.7及以上版本的编译后二进制文件中，头部除了四字节Magic Number，还有四个字节的空位和八个字节的时间戳+大小信息，后者对文件反编译没有影响，全部填充0即可；</li>
+<li>Python3.3 - Python3.7（包含3.3）版本中，只需要Magic Number和八位时间戳+大小信息</li>
+<li>Python3.3 以下的版本中，只有Magic Number和四位时间戳</li>
+</ul>
+</li>
+<li>
+<p>但是关键是怎么在magic缺失的情况下确定当前的pyc文件应该补充的是哪一个magic头（即如何确定python的版本）：这里拷打GPT获得以下答案，但是有待实战考证：</p>
+<ul>
+<li>找到疑似 <code>'c'</code> 偏移 <code>off</code></li>
+<li>分别尝试读取 <code>n = 4,5,6</code> 个 int</li>
+<li>读完后看下一个字节是否是常见 marshal tag（比如 <code>'s'</code>, <code>'('</code>, <code>'u'</code> 等）</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>版本范围（粗）</th>
+<th><code>'c'</code> 后的裸 int 个数（四字节为单位去数）</th>
+<th>这些 int 大致是什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Python 2.x</strong></td>
+<td><strong>4 个</strong></td>
+<td><code>argcount, nlocals, stacksize, flags</code></td>
+</tr>
+<tr>
+<td><strong>Python 3.0–3.7</strong></td>
+<td><strong>5 个</strong></td>
+<td><code>argcount, kwonlyargcount, nlocals, stacksize, flags</code></td>
+</tr>
+<tr>
+<td><strong>Python 3.8–3.10</strong></td>
+<td><strong>6 个</strong></td>
+<td><code>argcount, posonlyargcount, kwonlyargcount, nlocals, stacksize, flags</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>以这个题目为例：</li>
+</ul>
+<p><img src="image-20260130214808782.png" alt="image-20260130214808782" /></p>
+<p>因此应该是对应的2.x版本的python文件，其中常见的就是2.7，因此补充magic头<code>03 F3 0D 0A</code></p>
+<p>→这样补充完之后就可以正常的反编译了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 这里就能反编译了（后面就是re的事了）</span></span><br><span class="line">uncompyle6 -o PyHAHA.py .\rePyHaHa.pyc</span><br></pre></td></tr></table></figure>
+<hr />
+<ul>
+<li>额跑题了……这里应该说的是隐写工具DeEgger Embedder</li>
+</ul>
+<p>这里能明显看出来010Editor模板解析出来之后data字段后面还有很多内容：就是之前看的拼进去的压缩包了。</p>
+<p><img src="image-20260130221709877.png" alt="image-20260130221709877" /></p>
+<p>直接foremost提取即可：获得一个伪加密的压缩包：</p>
+<p><img src="image-20260130225514225.png" alt="image-20260130225514225" /></p>
+<p>修改后解压出mp3文件：这个模板解析后，最后一帧后面还有很多内容：</p>
+<p><img src="image-20260130230352799.png" alt="image-20260130230352799" /></p>
+<p>使用工具进行提取：</p>
+<p><img src="image-20260130232659258.png" alt="image-20260130232659258" /></p>
+<p>得到一堆base32编码内容，解码后发现没有什么用；<strong>这里发现那些内容解码后，后面带有奇怪的标，而且再编码回去与原来的不同了→存在base32隐写</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># base32隐写解密脚本</span></span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_base32_diff_value</span>(<span class="params">stego_line, normal_line</span>):</span><br><span class="line">    base32chars = <span class="string">&#x27;ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(normal_line)):</span><br><span class="line">        <span class="keyword">if</span> stego_line[i] != normal_line[i]:</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">abs</span>(base32chars.index(<span class="built_in">chr</span>(stego_line[i]))-base32chars.index(<span class="built_in">chr</span>(normal_line[i])))</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># base32 隐写解密</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">base32stego_decode</span>(<span class="params">lines</span>):</span><br><span class="line">    res = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> lines:</span><br><span class="line">        stego_line = i.strip()</span><br><span class="line">        normal_line = base64.b32encode(base64.b32decode(i.strip()))</span><br><span class="line">        diff = get_base32_diff_value(stego_line, normal_line)</span><br><span class="line">        <span class="comment"># 只处理带 padding 的行，因为没 = 的行通常没有“可随便改又不影响解码”的冗余位</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;=&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> <span class="built_in">str</span>(stego_line):</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="comment"># 加解密不一样说明存在隐藏数据</span></span><br><span class="line">        <span class="keyword">if</span> diff:</span><br><span class="line">            res += <span class="built_in">bin</span>(diff)[<span class="number">2</span>:]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            res += <span class="string">&#x27;0&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;Dream It Possible - extracted.txt&quot;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    file_lines = f.readlines()</span><br><span class="line">en=<span class="built_in">open</span>(<span class="string">&quot;encrypt.txt&quot;</span>,<span class="string">&quot;w&quot;</span>)</span><br><span class="line">en.write(base32stego_decode(file_lines))</span><br><span class="line">en.close()</span><br></pre></td></tr></table></figure>
+<p>（解密后获得一堆01序列，根据前面反编译的pyc代码写解密脚本即可……）</p>
+<blockquote>
+<p>base32隐写原理：<strong>利用 Base32 在出现 <code>=</code> 填充（padding）时，末尾会存在无效/被丢弃的比特位</strong>。很多解码器在解码时不会严格校验这些无效位是不是 0，于是就可以把这些无效位改掉来藏信息——<strong>改了编码串，但解出来的原始字节不变</strong>。</p>
+</blockquote>
+<h2 id="silenteye"><a class="markdownIt-Anchor" href="#silenteye"></a> SilentEye</h2>
+<p><strong>题目特征：需要密码时可以尝试使用该工具；由于本质是lsb隐写，因此一般是wav文件</strong></p>
+<p>题目来源：<a target="_blank" rel="noopener" href="https://ctf.bugku.com/challenges/detail/id/870.html">Bugku-哥们在这给你说唱</a></p>
+<p>​	之前还找到过一道题，附件直接放在工具安装的文件夹里了<a target="_blank" rel="noopener" href="https://www.xuenixiang.com/plugin.php?eid=70&amp;id=ctfexercise%3Acompetition">2015 广东省强网杯 - Little Apple</a></p>
+<p>参考博客：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zysgmzb/p/16834602.html">0xGame2022 Week1~4 Misc Offical Writeup &amp; 全附件 - zysgmzb - 博客园</a></p>
+<p><img src="image-20260202161257096.png" alt="image-20260202161257096" /></p>
+<p>获得密码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pass:15gmzzgnscltcltdz</span><br></pre></td></tr></table></figure>
+<h2 id="deepsound"><a class="markdownIt-Anchor" href="#deepsound"></a> DeepSound</h2>
+<p><strong>题目特征：需要密码的音频隐写；题目描述可能暗示deepsound；也是常见于wav文件</strong></p>
+<p>接上一节拿到了密码，想到要用密码加密的工具</p>
+<p>使用 DeepSound 工具打开文件，输入密码</p>
+<p><img src="image-20260202163454571.png" alt="image-20260202163454571" /></p>
+<p>即可获得flag</p>
+<p><img src="image-20260202163627331.png" alt="image-20260202163627331" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0xGame&#123;5d4d7df0-6de7-4897-adee-e4b3828978f8&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="音频文件构成"><a class="markdownIt-Anchor" href="#音频文件构成"></a> 音频文件构成</h1>
+<p><strong>这里的相关知识点见前言中的汇总</strong></p>
+<h2 id="copyright位隐写"><a class="markdownIt-Anchor" href="#copyright位隐写"></a> Copyright位隐写</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.tms.im/2021/03/30/ctf-mp3-copyright-bit.html">MP3文件隐写之Copyright位 - TMs</a></p>
+<p><strong>题目特征：不同帧之间的copyright位在0/1之间不断变化</strong></p>
+<p>这个题目就是因为发现某些帧的copyright是1，有的是0；因此怀疑这里可能是隐藏的信息的。</p>
+<p><img src="image-20260120215045112.png" alt="image-20260120215045112" /></p>
+<p><img src="image-20260120215135869.png" alt="image-20260120215135869" /></p>
+<p>【010 里 <code>copyright : 1</code> 里的 <code>: 1</code> <strong>不是值</strong>，只是表示占一个bit；值要看后面的value】</p>
+<p>在提取的过程中发现一个问题。<strong>该MP3文件每一帧的长度不固定</strong>，有的是414H，有的是415H</p>
+<p><img src="image-20260120174548168.png" alt="image-20260120174548168" /></p>
+<p>翻看资料得知<strong>帧长度的变化和padding填充位有关</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">帧长度是压缩时每一帧的长度，包括帧头的4个字节。它将填充的空位也计算在内。</span><br><span class="line">Layer 1的一个空位长4字节，Layer 2和Layer 3的空位是1字节。</span><br><span class="line">当读取MPEG文件时必须计算该值以便找到相邻的帧。</span><br><span class="line"></span><br><span class="line">注意：因为有填充和比特率变换，帧长度可能变化 </span><br></pre></td></tr></table></figure>
+<p>观察本文件得知如果padding位为1，帧长度就是415H，padding位为0，帧长度就是414H。</p>
+<p><img src="image-20260120175116833.png" alt="image-20260120175116833" /></p>
+<p><img src="image-20260120175239240.png" alt="image-20260120175239240" /></p>
+<p>查询得知第一帧的起始位置为984484</p>
+<p><img src="image-20260120174756795.png" alt="image-20260120174756795" /></p>
+<p>​	又因为帧头为4个字符，<strong>padding_bit位于第三个字节的倒数第二位</strong>，<strong>而copyright位于第四个字符的倒数第四位</strong>。所以从984486开始查找，向后读取一个字节提取padding_bit，再向后读取一个字节提取copyright。</p>
+<p>故写出一下python代码进行copyright位的提取。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># coding:utf-8</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> binascii</span><br><span class="line"></span><br><span class="line">n = <span class="number">984486</span>  <span class="comment"># 起始位置，由于padding位于第三个字节，因此比第一帧初始位置加上2个字节</span></span><br><span class="line">result = <span class="string">&#x27;&#x27;</span></span><br><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;flag.mp3&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line"><span class="comment"># 提取</span></span><br><span class="line"><span class="keyword">while</span> n &lt; <span class="number">12658083</span>:  <span class="comment"># 结束位置</span></span><br><span class="line">    file.seek(n, <span class="number">0</span>)</span><br><span class="line">    head = file.read(<span class="number">1</span>)</span><br><span class="line">    padding = <span class="string">&#x27;&#123;:08b&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">ord</span>(head))[-<span class="number">2</span>]</span><br><span class="line"></span><br><span class="line">    file.seek(n+<span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">    file_read_result = file.read(<span class="number">1</span>)</span><br><span class="line">    result += <span class="string">&#x27;&#123;:08b&#125;&#x27;</span>.<span class="built_in">format</span>(<span class="built_in">ord</span>(file_read_result))[-<span class="number">4</span>]</span><br><span class="line"></span><br><span class="line">    n += <span class="number">1045</span> <span class="keyword">if</span> padding == <span class="string">&quot;1&quot;</span> <span class="keyword">else</span> <span class="number">1044</span></span><br><span class="line"><span class="comment"># 拼接</span></span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line">textArr = re.findall(<span class="string">&#x27;.&#123;&#x27;</span>+<span class="built_in">str</span>(<span class="number">8</span>)+<span class="string">&#x27;&#125;&#x27;</span>, result)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> textArr:</span><br><span class="line">    flag = flag + <span class="built_in">chr</span>(<span class="built_in">int</span>(i, <span class="number">2</span>)).strip(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+<h2 id="private位隐写"><a class="markdownIt-Anchor" href="#private位隐写"></a> Private位隐写</h2>
+<p>题目来源：<a target="_blank" rel="noopener" href="https://adworld.xctf.org.cn/challenges/list">攻防世界-nice_bgm</a></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wyuu101/p/18831595">【攻防世界】nice_bgm - wyuu101 - 博客园</a></p>
+<p><strong>题目特征：正常默认文件的private都是0，如果出现1的话需要注意了</strong></p>
+<p><img src="image-20260127194417817.png" alt="image-20260127194417817" /></p>
+<p>（这里也有个小技巧可以提取一下前8帧的private位，看看是不是真的存在隐写）</p>
+<p>提取前八个得到 01000110，转为 ASCII 码是 F →→→ 基本可以确定是private位隐写了</p>
+<p>这里写脚本与copyright位隐写类似，需要解决确定帧起始位置以及不同的帧长度不同的问题</p>
+<p><img src="image-20260127212755525.png" alt="image-20260127212755525" /></p>
+<p>确定第一帧 mf[0] 的起始位置是235984</p>
+<p><img src="image-20260127213213508.png" alt="image-20260127213213508" /></p>
+<p>private_bit 为 <code>4字节帧头中的24位</code> ，所在的字节为第 3 个字节，因此该字节对应的地址为 <code>235984+2=235986</code>，即为第一个 private_bit 开始地址【这是另一篇博客的脚本，可以与上面的copyright位隐写的脚本对比来看】</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> textwrap</span><br><span class="line"></span><br><span class="line">list_private_bit = []</span><br><span class="line"></span><br><span class="line"><span class="comment"># 帧序列开头的地址</span></span><br><span class="line">first_frame_index = <span class="built_in">int</span>(<span class="string">&quot;399D0&quot;</span>, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;nice_bgm.mp3&quot;</span>, <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    <span class="comment"># 将文件指针移动到第一帧开头</span></span><br><span class="line">    f.seek(first_frame_index)</span><br><span class="line">    <span class="comment"># 因为从010Editor上看到总共有5910帧（其实应该编写更严谨的判定代码，但是懒得写）</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5911</span>):</span><br><span class="line">        <span class="comment"># 每一帧的帧头部数据占4字节，而私有位和padding位恰好在第三字节的</span></span><br><span class="line">        data = f.read(<span class="number">4</span>)[<span class="number">2</span>]</span><br><span class="line">        <span class="comment"># 提取私有位并添加到列表中</span></span><br><span class="line">        list_private_bit.append(data &amp; <span class="number">0b00000001</span>)</span><br><span class="line">        <span class="comment"># 提取padding位</span></span><br><span class="line">        padding_bit = (data &gt;&gt; <span class="number">1</span>) &amp; <span class="number">0b00000001</span></span><br><span class="line">        <span class="comment"># 如果padding位为0，则说明该帧大小为417字节，否则为418字节；方便文件指针精准定位到下一帧的开头</span></span><br><span class="line">        <span class="keyword">if</span> padding_bit == <span class="number">0</span>:</span><br><span class="line">            first_frame_index += <span class="number">417</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            first_frame_index += <span class="number">418</span></span><br><span class="line">        f.seek(first_frame_index)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理提取完成后的私有位，转为文本后输出得到flag</span></span><br><span class="line">list_private_bit_str = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">str</span>, list_private_bit))</span><br><span class="line">bits_wrapped = textwrap.wrap(<span class="string">&quot;&quot;</span>.join(list_private_bit_str), <span class="number">8</span>)</span><br><span class="line">flag = <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">for</span> words <span class="keyword">in</span> bits_wrapped:</span><br><span class="line">    flag += <span class="built_in">chr</span>(<span class="built_in">int</span>(words, <span class="number">2</span>))</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+<p><strong>注意</strong>：脚本仅为解题编写，并不严谨。MP3为逐帧解析的文件，本脚本默认把所有帧都是相同的比特率和采样率，但实际上有可能存在帧之间采样率与比特率不一致的情况，严谨的写法应该是先读取帧头部的数据并根据官方技术文档的定义判定比特率和采样率，再计算出实际的帧大小。</p>
+<h2 id="original位隐写"><a class="markdownIt-Anchor" href="#original位隐写"></a> Original位隐写</h2>
+<p><strong>题目特征：不同帧的original位不同</strong></p>
+<p>题目来源：<a target="_blank" rel="noopener" href="https://ctf.show/challenges#%E6%B2%A1%E8%80%B3%E6%9C%B5%E9%83%BD%E5%8F%AF%E4%BB%A5-4479">ctfshow(2024单身杯)-没耳朵都可以</a></p>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/xczzhf/article/details/143729850">ctfshow单身杯2024 Writeup By V3geD4g_ctfshow 没耳朵都可以-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://ctf-show.feishu.cn/docx/R6udd58bxoQGQMxFphncZq8rn5e">CTFshow DSBCTF 官方WP </a>（本地该题目的路径下留存了文档）</p>
+<ul>
+<li><strong>实际常见情况</strong>：如果整文件是同一个编码器一次性编码出来的，通常会看到 <strong>所有帧都一样</strong>（全 0 或全 1），因为编码器会用同一套 header 标志。</li>
+</ul>
+<p>【这个题也是很抽象，不是直接用前几帧直接隐写ASCII编码的字符串，而是整个文件的所有帧合着隐写进去一个01描述的图片，因此由于跨度很大比较难发现original位的变化】</p>
+<ul>
+<li>original位的提取，沿用之前的即可：只需要修改一下帧起始地址、总帧数以及帧长度（这里是414h与415h）。另外找到一个简洁但是可能不准确的帧头匹配方式</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">data = open(&quot;noear.mp3&quot;, &quot;rb&quot;).read()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">with open(&quot;ori.txt&quot;, &quot;w&quot;) as f:</span></span><br><span class="line"><span class="string">    for i in range(len(data) - 3):</span></span><br><span class="line"><span class="string">        # 帧头特征：FF FB + (E2/E0) 有可能出现误匹配或者漏匹配问题</span></span><br><span class="line"><span class="string">        if data[i] == 0xFF and data[i+1] == 0xFB and data[i+2] in (0xE2, 0xE0):</span></span><br><span class="line"><span class="string">            f.write(format(data[i+3], &quot;08b&quot;)[-3])  # 第4字节倒数第3位</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 帧序列开头地址（十六进制）</span></span><br><span class="line">first_frame_index = <span class="built_in">int</span>(<span class="string">&quot;5A&quot;</span>, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&quot;noear.mp3&quot;</span>, <span class="string">&quot;rb&quot;</span>) <span class="keyword">as</span> f, <span class="built_in">open</span>(<span class="string">&quot;ori.txt&quot;</span>, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> out:</span><br><span class="line">    f.seek(first_frame_index)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">9876</span>):</span><br><span class="line">        hdr = f.read(<span class="number">4</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(hdr) &lt; <span class="number">4</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">        b2 = hdr[<span class="number">2</span>]  <span class="comment"># 第3字节：padding 在这里</span></span><br><span class="line">        b3 = hdr[<span class="number">3</span>]  <span class="comment"># 第4字节：original 在这里</span></span><br><span class="line"></span><br><span class="line">        original_bit = <span class="number">1</span> <span class="keyword">if</span> (b3 &amp; <span class="number">0x04</span>) <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">        out.write(<span class="built_in">str</span>(original_bit))</span><br><span class="line"></span><br><span class="line">        padding_bit = (b2 &gt;&gt; <span class="number">1</span>) &amp; <span class="number">1</span></span><br><span class="line">        first_frame_index += <span class="number">0x414</span> + padding_bit  <span class="comment"># padding=1 -&gt; 0x415</span></span><br><span class="line">        f.seek(first_frame_index)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>提取出来的数据是这样很多0掺杂着1，应该就是1表示黑色，0表示白色这样的作图的效果；只需要找到何时的长与宽画出图来就行</li>
+</ul>
+<p><img src="image-20260131212025213.png" alt="image-20260131212025213" /></p>
+<ul>
+<li>作图的话有一个巧思：不用原来抽象的0与1进行填充，而用空格与黑方框填充</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">original_bit = <span class="string">&#x27;█&#x27;</span> <span class="keyword">if</span> (b3 &amp; <span class="number">0x04</span>) <span class="keyword">else</span> <span class="string">&#x27; &#x27;</span></span><br></pre></td></tr></table></figure>
+<p>​	这样就可以直接在文本编辑器里通过放大缩小比例尺看出来flag了【但是实操的时候我没有调出来，notepad++不支持一个字符一个字符的重排调整】</p>
+<ul>
+<li>另一种基础的就是爆破找到合适的比例画出图（最暴力的从宽是200开始涨到500）：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"></span><br><span class="line">bits = <span class="built_in">open</span>(<span class="string">&quot;ori.txt&quot;</span>, <span class="string">&quot;r&quot;</span>).read().strip()</span><br><span class="line">os.makedirs(<span class="string">&quot;tmp&quot;</span>, exist_ok=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">n = <span class="built_in">len</span>(bits)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> w <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">200</span>, <span class="number">500</span>):</span><br><span class="line">    h = (n + w - <span class="number">1</span>) // w</span><br><span class="line"></span><br><span class="line">    img = Image.new(<span class="string">&quot;1&quot;</span>, (w, h), <span class="number">1</span>)  <span class="comment"># 背景填白（1=白）</span></span><br><span class="line">    px = img.load()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 作图1是黑0是白</span></span><br><span class="line">    <span class="keyword">for</span> i, ch <span class="keyword">in</span> <span class="built_in">enumerate</span>(bits):</span><br><span class="line">        px[i % w, i // w] = (ch == <span class="string">&quot;0&quot;</span>)</span><br><span class="line"></span><br><span class="line">    img.save(<span class="string">f&quot;tmp/image_<span class="subst">&#123;w&#125;</span>x<span class="subst">&#123;h&#125;</span>.png&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>​	问题就是产生大量的图片需要一点点看是哪一个【这里还存了一个不保存图片直接查看的版本<a href="./Ques/%E6%B2%A1%E8%80%B3%E6%9C%B5%E9%83%BD%E5%8F%AF%E4%BB%A5/show_draw.py">show_draw.py</a>】；而且爆破的范围选取很重要</p>
+<p>​	最后在301像素的宽的时候找到（这打印体的8写的挺有意思）</p>
+<p><img src="image_301x33.png" alt="heibai" /></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctfshow&#123;4c7bdef8-6266-49c2-80ed-c6ceaf5ebf5d&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="其他有关音频的特性"><a class="markdownIt-Anchor" href="#其他有关音频的特性"></a> 其他有关音频的特性</h1>
+<h2 id="velato-编译mid"><a class="markdownIt-Anchor" href="#velato-编译mid"></a> Velato 编译（Mid）</h2>
+<p><strong>题目特征：MIDI 文件优先考虑 Velato 编译</strong></p>
+<p>题目来源：<a target="_blank" rel="noopener" href="https://ctf.bugku.com/challenges/detail/id/877.html">Bugku/0xGame-听首音乐？</a></p>
+<p>参考博客：<a target="_blank" rel="noopener" href="https://kkkkkkkotori.top/index.php/2022/10/23/0xgame-2022-misc-wp/#toc-head-14">0xGame 2022 Misc WP – 之寒的小站</a></p>
+<p>​		<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zysgmzb/p/16834602.html">0xGame2022 Week1~4 Misc Offical Writeup &amp; 全附件 - zysgmzb - 博客园</a></p>
+<blockquote>
+<p>MIDI 文件（通常指标准 MIDI 文件，SMF，扩展名 .mid）是一种<strong>面向事件（event-based）的时间序列数据容器</strong>：它以离散事件的方式记录音乐表演控制信息（如音符按下/抬起、力度、控制器、节目切换与速度等），用于在软硬件系统间交换可复现的演奏过程；其数据本身<strong>不包含波形音频</strong>。</p>
+<p><strong>一个 MIDI 文件 = 1 个 Header Chunk（MThd） + n 个 Track Chunk（MTrk）</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>层级/字段（SMF 典型结构）</th>
+<th>简述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chunk Type（<code>MThd</code> / <code>MTrk</code>）</td>
+<td>块类型：文件头块/轨道块（magic）</td>
+</tr>
+<tr>
+<td>Chunk Length</td>
+<td>该块数据区长度（字节数）</td>
+</tr>
+<tr>
+<td><strong>Header: Format</strong></td>
+<td>文件格式：0（单轨）、1（多轨同步）、2（多段独立）</td>
+</tr>
+<tr>
+<td><strong>Header: ntrks</strong></td>
+<td>轨道块数量</td>
+</tr>
+<tr>
+<td><strong>Header: Division</strong></td>
+<td>时间基准：tick/四分音符（PPQN）或 SMPTE 时间码</td>
+</tr>
+<tr>
+<td><strong>Track: Event Δtime</strong></td>
+<td>与前一事件的时间增量（tick），定义事件在时间轴上的位置</td>
+</tr>
+<tr>
+<td><strong>Track: Status Byte</strong></td>
+<td>事件类型与 MIDI 通道（如 Note On/Off、Control Change 等）</td>
+</tr>
+<tr>
+<td><strong>Track: Data Bytes</strong></td>
+<td>事件参数（如音高 key、力度 velocity、控制器号与值等）</td>
+</tr>
+<tr>
+<td>Meta Event（以 <code>0xFF</code> 开头）</td>
+<td>非实时“文件级”信息：速度（Tempo）、拍号、调号、轨道名、结束标记等</td>
+</tr>
+<tr>
+<td>SysEx Event</td>
+<td>系统独占消息：厂商/设备特定数据（如音色设备配置等）</td>
+</tr>
+</tbody>
+</table>
+<p>【Track是文件里并行的事件流容器，有几个事件流就有几个Track】</p>
+<p><img src="image-20260202205408477.png" alt="image-20260202205408477" /></p>
+<p>在 上面为代表的这种<strong>Format 1</strong> 里常见的组织方式是：</p>
+<ul>
+<li><strong>Track 0：Conductor/控制轨</strong>
+<ul>
+<li>放 Tempo/拍号/调号/Marker 等 Meta</li>
+</ul>
+</li>
+<li><strong>Track 1…N：演奏轨</strong>
+<ul>
+<li>放音符、控制器、换乐器等通道事件（也可能夹杂少量 Meta，比如轨道名）</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>Velato</strong> 是一种实验性编程语言（esoteric language），其设计理念在于将音乐结构作为形式语言的载体：程序的语法与语义由音高序列及其相对关系（如相对“根音”的音程映射与根音切换机制）所编码，从而实现“可听化的源代码表示”。</p>
+<p>与 <strong>MIDI</strong> 的关系可概括为“<strong>表示层—解释层</strong>”的分离：<strong>标准 MIDI 文件（SMF）<strong>提供了规范化的事件序列容器（轨道、时间增量与音符事件等），而 <strong>Velato</strong> 在此容器之上定义解释规则，通常从 MIDI 轨道中的 Note 事件抽取音高与时序信息，并将其映射为语言的记号、控制结构与运算过程。因此，MIDI 在该场景中承担的是</strong>程序表示/编码格式</strong>的角色，而 Velato 则给出从该表示到可执行计算的<strong>语义赋值（semantic interpretation）</strong>。</p>
+</blockquote>
+<ul>
+<li><strong>Velato 是一种编程语言，使用 MIDI 文件作为源代码，音符模式决定命令</strong></li>
+<li><a target="_blank" rel="noopener" href="https://velato.net/">官方下载网址</a>&amp;&amp;<a target="_blank" rel="noopener" href="https://github.com/rottytooth/Velato">GitHub新版本</a></li>
+</ul>
+<hr />
+<ul>
+<li>直接编译mid文件即可，会在编译器所在文件夹里生成exe文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(base)PS D:\MiscTools\MP3\Velato\Velato_0_1&gt; .\Vlt.exe E:\wkplace\MP3\听首音乐\music.mid</span><br><span class="line">2 tracks found, will <span class="built_in">read</span> 1st track containing note information.</span><br><span class="line">Program</span><br><span class="line">        DeclareFunction</span><br><span class="line">                PrintToScreen</span><br><span class="line">                        CharConstant</span><br></pre></td></tr></table></figure>
+<ul>
+<li>然后运行exe文件即可看到</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(base)PS D:\MiscTools\MP3\Velato\Velato_0_1&gt; .\music.exe</span><br><span class="line">What a long number:4642488275724448709921860001805542920743247922240305533</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里拿到的一个巨大的数字，这就涉及到另一个常见的操作<strong>n2s（Number to String）</strong></li>
+</ul>
+<blockquote>
+<p>给定十进制大整数 <code>N</code></p>
+<p>把 <code>N</code> 视为 <strong>大端（big-endian）</strong> 的二进制数</p>
+<p>转成对应的 <strong>bytes</strong></p>
+<p>再把 bytes 当 ASCII/UTF-8 解码，就能看到可读字符串</p>
+</blockquote>
+<p>这里可以直接用自带的库函数n2s进行操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">(web)PS C:\Users\AnRan&gt; python</span><br><span class="line">Python <span class="number">3.10</span><span class="number">.17</span> | packaged by conda-forge | (main, Apr <span class="number">10</span> <span class="number">2025</span>, <span class="number">22</span>:06:<span class="number">35</span>) [MSC v<span class="number">.1943</span> <span class="number">64</span> bit (AMD64)] on win32</span><br><span class="line"><span class="type">Type</span> <span class="string">&quot;help&quot;</span>, <span class="string">&quot;copyright&quot;</span>, <span class="string">&quot;credits&quot;</span> <span class="keyword">or</span> <span class="string">&quot;license&quot;</span> <span class="keyword">for</span> more information.</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> libnum</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = <span class="number">4642488275724448709921860001805542920743247922240305533</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>libnum.n2s(a)</span><br><span class="line"><span class="string">b&#x27;0xGame&#123;StRAnGe_eSOL4N9&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>也可以用密码学的库里面的long_to_bytes函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> Crypto.Util.number <span class="keyword">import</span> *</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>long_to_bytes(<span class="number">4642488275724448709921860001805542920743247922240305533</span>)</span><br><span class="line"><span class="string">b&#x27;0xGame&#123;StRAnGe_eSOL4N9&#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/MP3/" rel="tag"># \- MP3</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/posts/StartBlog/" rel="next" title="The Beginning of a Blog Era">
+                  The Beginning of a Blog Era <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Ax01otl</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
